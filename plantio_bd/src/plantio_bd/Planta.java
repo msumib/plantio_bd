@@ -17,6 +17,7 @@ public class Planta extends javax.swing.JDialog {
     public Planta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
     }
 
     /**

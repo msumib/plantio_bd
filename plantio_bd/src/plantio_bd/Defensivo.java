@@ -17,6 +17,7 @@ public class Defensivo extends javax.swing.JDialog {
     public Defensivo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
     }
 
     /**

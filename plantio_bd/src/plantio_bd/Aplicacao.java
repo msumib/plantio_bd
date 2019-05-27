@@ -17,6 +17,7 @@ public class Aplicacao extends javax.swing.JDialog {
     public Aplicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
     }
 
     /**

@@ -17,6 +17,7 @@ public class Lavoura extends javax.swing.JDialog {
     public Lavoura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
     }
 
     /**
