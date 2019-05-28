@@ -77,11 +77,11 @@ public class Planta extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Tipo:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Cultivo:");
+        jLabel4.setText("Cultivar:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trigo", "Soja", "Milho", "Aveia" }));
         jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);

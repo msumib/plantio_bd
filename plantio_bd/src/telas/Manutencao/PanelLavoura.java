@@ -5,6 +5,8 @@
  */
 package telas.Manutencao;
 
+import java.awt.Color;
+
 /**
  *
  * @author itzfeltrin
@@ -16,6 +18,8 @@ public class PanelLavoura extends javax.swing.JPanel {
      */
     public PanelLavoura() {
         initComponents();
+        Color color = Color.decode("#a6badb");
+        setBackground(color);
     }
 
     /**
@@ -43,6 +47,12 @@ public class PanelLavoura extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Lavoura");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -144,6 +154,10 @@ public class PanelLavoura extends javax.swing.JPanel {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

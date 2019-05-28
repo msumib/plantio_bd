@@ -34,8 +34,11 @@ public class Lavoura extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        setTitle("Info Lavoura");
         jTabbedPane1.add("Lavoura", new PanelLavoura());
-        jTabbedPane1.add("Produtividade da Lavoura", new PanelLavouraProdutividade());
+        jTabbedPane1.add("Produtividade da Lavoura", new telas.Manutencao.PanelProdutividade());
+        jTabbedPane1.add("Aplicação da Lavoura", new PanelAplicacao());
+        jTabbedPane1.add("Relação Lavoura/Planta", new PanelLavouraPlanta());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
