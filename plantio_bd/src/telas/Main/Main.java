@@ -32,7 +32,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         mainTabbedPane = new javax.swing.JTabbedPane();
-        jLabelFundoPrincipal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,8 +61,10 @@ public class Main extends javax.swing.JFrame {
 
         getContentPane().add(mainTabbedPane);
         mainTabbedPane.setBounds(0, 70, 720, 360);
-        getContentPane().add(jLabelFundoPrincipal);
-        jLabelFundoPrincipal.setBounds(0, 0, 720, 973);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo_telaprincipal.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, -10, 730, 480);
 
         jMenu1.setText("Conta");
         jMenu1.setMargin(new java.awt.Insets(0, 0, 0, 10));
@@ -136,7 +138,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelFundoPrincipal;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
