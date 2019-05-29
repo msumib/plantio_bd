@@ -11,11 +11,13 @@ package telas.Main;
  */
 public class PanelCadastro extends javax.swing.JPanel {
 
+    private javax.swing.JTabbedPane parentPane;
     /**
      * Creates new form PanelCadastro
      */
-    public PanelCadastro() {
+    public PanelCadastro(javax.swing.JTabbedPane mainTabbedPane) {
         initComponents();
+        this.parentPane = mainTabbedPane;
     }
 
     /**

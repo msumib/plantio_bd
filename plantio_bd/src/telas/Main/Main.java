@@ -57,12 +57,10 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setBounds(10, 0, 690, 70);
 
         mainTabbedPane.add("Login", new PanelLogin(mainTabbedPane));
-        mainTabbedPane.add("Cadastro", new PanelCadastro());
+        mainTabbedPane.add("Cadastro", new PanelCadastro(mainTabbedPane));
 
         getContentPane().add(mainTabbedPane);
         mainTabbedPane.setBounds(0, 70, 720, 360);
-
-        jLabelFundoPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo_telaprincipal.jpg"))); // NOI18N
         getContentPane().add(jLabelFundoPrincipal);
         jLabelFundoPrincipal.setBounds(0, 0, 720, 973);
 

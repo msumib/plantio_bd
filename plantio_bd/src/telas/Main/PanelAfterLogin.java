@@ -11,12 +11,16 @@ package telas.Main;
  */
 public class PanelAfterLogin extends javax.swing.JPanel {
 
+    private String username;
     /**
      * Creates new form PanelAfterLogin
+     * @param nome
      */
-    public PanelAfterLogin() {
+    public PanelAfterLogin(String nome) {
         initComponents();
-    }
+        this.username = nome;
+        lblLogText.setText("Logged in as " + this.username);        
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,19 +31,29 @@ public class PanelAfterLogin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLogText = new javax.swing.JLabel();
+
+        lblLogText.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
+        lblLogText.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblLogText, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblLogText, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 301, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblLogText;
     // End of variables declaration//GEN-END:variables
 }
