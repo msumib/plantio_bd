@@ -15,10 +15,15 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public Main() {
-        initComponents();
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setTitle("Program");
+        try {
+            initComponents();
+            setResizable(false);
+            setLocationRelativeTo(null);
+            setTitle("Program");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -61,8 +66,6 @@ public class Main extends javax.swing.JFrame {
 
         getContentPane().add(mainTabbedPane);
         mainTabbedPane.setBounds(0, 70, 720, 360);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo_telaprincipal.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, -10, 730, 480);
 
