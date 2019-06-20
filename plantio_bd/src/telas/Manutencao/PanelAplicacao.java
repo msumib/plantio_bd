@@ -293,7 +293,9 @@ public class PanelAplicacao extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        telas.Listagem.Lavoura lav = new telas.Listagem.Lavoura(null, true);
+        lav.setVisible(true);
+        lav.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
