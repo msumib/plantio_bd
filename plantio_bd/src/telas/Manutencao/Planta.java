@@ -5,6 +5,8 @@
  */
 package telas.Manutencao;
 
+import java.awt.Color;
+
 /**
  *
  * @author umib
@@ -18,6 +20,8 @@ public class Planta extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setResizable(false);
+        Color color = Color.decode("#a6badb");
+        setBackground(color);
     }
 
     /**
@@ -151,7 +155,7 @@ public class Planta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

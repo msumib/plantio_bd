@@ -18,8 +18,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
      */
     public PanelAplicacao() {
         initComponents();
-        Color color = Color.decode("#a6badb");
-        setBackground(color);
     }
 
     /**
@@ -36,7 +34,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -44,13 +42,13 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
@@ -69,7 +67,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Defensivo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -104,7 +102,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Código:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lavoura 1", "Lavoura 2", "Lavoura 3" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lavoura 1", "Lavoura 2", "Lavoura 3" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -126,7 +124,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Defensivo:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
@@ -147,6 +145,11 @@ public class PanelAplicacao extends javax.swing.JPanel {
 
         jButton7.setText("Cancelar");
         jButton7.setPreferredSize(new java.awt.Dimension(80, 25));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Consultar");
         jButton8.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -255,6 +258,10 @@ public class PanelAplicacao extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        this.getTopLevelAncestor().setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

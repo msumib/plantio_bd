@@ -36,9 +36,9 @@ public class PanelCadastro extends javax.swing.JPanel {
         lblSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        lblUser1 = new javax.swing.JTextField();
+        lblNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        lblConfSenha = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,7 +83,7 @@ public class PanelCadastro extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,7 +99,7 @@ public class PanelCadastro extends javax.swing.JPanel {
                         .addGap(68, 68, 68)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +114,7 @@ public class PanelCadastro extends javax.swing.JPanel {
                         .addGap(7, 7, 7)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
@@ -124,7 +124,7 @@ public class PanelCadastro extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(lblConfSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
@@ -132,8 +132,27 @@ public class PanelCadastro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //this.setVisible(false);
-        lblUser.setText("caracas!");
+        if(lblNome.getText().length() == 0){
+            System.out.println("Nome não pode ser vazio!");
+        }
+        else if(lblUser.getText().length() == 0){                
+            System.out.println("Usuário não pode ficar vazio!");
+        }
+        else if(lblSenha.getPassword().length == 0){
+            System.out.println("Senha não informada!");
+        }
+        else if(lblConfSenha.getPassword().length == 0){
+            System.out.println("Por favor confirme a senha!");
+        }
+        else if(!(lblSenha.getText().equals(lblConfSenha.getText()))){
+            System.out.println("Senhas não conferem!");
+        }
+        else {
+            this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+            this.parentPane.setSelectedIndex(2);
+            this.parentPane.setEnabledAt(0, false);                
+            this.parentPane.setEnabledAt(1, false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -144,9 +163,9 @@ public class PanelCadastro extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField lblConfSenha;
+    private javax.swing.JTextField lblNome;
     private javax.swing.JPasswordField lblSenha;
     private javax.swing.JTextField lblUser;
-    private javax.swing.JTextField lblUser1;
     // End of variables declaration//GEN-END:variables
 }

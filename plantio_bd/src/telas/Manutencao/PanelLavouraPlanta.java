@@ -18,8 +18,6 @@ public class PanelLavouraPlanta extends javax.swing.JPanel {
      */
     public PanelLavouraPlanta() {
         initComponents();
-        Color color = Color.decode("#a6badb");
-        setBackground(color);
     }
 
     /**
@@ -61,6 +59,11 @@ public class PanelLavouraPlanta extends javax.swing.JPanel {
 
         jButton2.setText("Cancelar");
         jButton2.setPreferredSize(new java.awt.Dimension(80, 25));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Consultar");
         jButton3.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -191,6 +194,10 @@ public class PanelLavouraPlanta extends javax.swing.JPanel {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.getTopLevelAncestor().setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
