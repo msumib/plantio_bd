@@ -5,6 +5,9 @@
  */
 package telas.Main;
 
+import dao.UserDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author itzfeltrin
@@ -132,27 +135,36 @@ public class PanelCadastro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(lblNome.getText().length() == 0){
-            System.out.println("Nome não pode ser vazio!");
-        }
-        else if(lblUser.getText().length() == 0){                
-            System.out.println("Usuário não pode ficar vazio!");
-        }
-        else if(lblSenha.getPassword().length == 0){
-            System.out.println("Senha não informada!");
-        }
-        else if(lblConfSenha.getPassword().length == 0){
-            System.out.println("Por favor confirme a senha!");
-        }
-        else if(!(lblSenha.getText().equals(lblConfSenha.getText()))){
-            System.out.println("Senhas não conferem!");
-        }
+//        if(lblNome.getText().length() == 0){
+//            System.out.println("Nome não pode ser vazio!");
+//        }
+//        else if(lblUser.getText().length() == 0){                
+//            System.out.println("Usuário não pode ficar vazio!");
+//        }
+//        else if(lblSenha.getPassword().length == 0){
+//            System.out.println("Senha não informada!");
+//        }
+//        else if(lblConfSenha.getPassword().length == 0){
+//            System.out.println("Por favor confirme a senha!");
+//        }
+//        else if(!(lblSenha.getText().equals(lblConfSenha.getText()))){
+//            System.out.println("Senhas não conferem!");
+//        }
+//        else {
+//            this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+//            this.parentPane.setSelectedIndex(2);
+//            this.parentPane.setEnabledAt(0, false);                
+//            this.parentPane.setEnabledAt(1, false);
+//        }
+        boolean resultado = UserDao.inserir(lblNome.getText(), lblUser.getText(), lblSenha.getText());
+        if (resultado) {
+            JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
+        } 
         else {
-            this.parentPane.add("Home", new PanelHome(lblUser.getText()));
-            this.parentPane.setSelectedIndex(2);
-            this.parentPane.setEnabledAt(0, false);                
-            this.parentPane.setEnabledAt(1, false);
+            JOptionPane.showMessageDialog(null, "Erro!");
         }
+        boolean result = UserDao.autentica(lblUser.getText(), lblSenha.getText());
+        System.out.println(result);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
