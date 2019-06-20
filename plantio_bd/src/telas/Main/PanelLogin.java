@@ -92,11 +92,14 @@ public class PanelLogin extends javax.swing.JPanel {
             if(lblSenha.getPassword().length == 0){
                 System.out.println("O campo de senha não pode ficar vazio!");
             }
-            else {                
-                this.parentPane.add("Home", new PanelHome(lblUser.getText()));
-                this.parentPane.setSelectedIndex(2);
-                this.parentPane.setEnabledAt(0, false);                
-                this.parentPane.setEnabledAt(1, false);                
+            else {
+                boolean res = dao.UserDao.autentica(lblUser.getText(), lblSenha.getText());
+                if(res){
+                    this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+                    this.parentPane.setSelectedIndex(2);
+                    this.parentPane.setEnabledAt(0, false);                
+                    this.parentPane.setEnabledAt(1, false);                
+                }                
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

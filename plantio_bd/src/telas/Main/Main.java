@@ -5,6 +5,8 @@
  */
 package telas.Main;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author itzfeltrin
@@ -45,7 +47,6 @@ public class Main extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,12 +74,27 @@ public class Main extends javax.swing.JFrame {
         jMenu1.setMargin(new java.awt.Insets(0, 0, 0, 10));
 
         jMenuItem1.setText("Cadastrar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Entrar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Sair");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -91,10 +107,6 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Ferramentas");
-        jMenu3.setMargin(new java.awt.Insets(0, 0, 0, 10));
-        jMenuBar1.add(jMenu3);
-
         jMenu4.setText("Sobre");
         jMenu4.setMargin(new java.awt.Insets(0, 0, 0, 10));
         jMenuBar1.add(jMenu4);
@@ -103,6 +115,35 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(this.mainTabbedPane.getSelectedIndex() == 2){
+            JOptionPane.showMessageDialog(null, "Você já está logado!");
+        }
+        else {
+            this.mainTabbedPane.setSelectedIndex(1);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if(this.mainTabbedPane.getSelectedIndex() == 2){
+            JOptionPane.showMessageDialog(null, "Você já está logado!");
+        }
+        else {
+            this.mainTabbedPane.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(this.mainTabbedPane.getSelectedIndex() == 2){
+            this.dispose();
+            Main main = new Main();
+            main.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Você não está conectado!");
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,7 +185,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

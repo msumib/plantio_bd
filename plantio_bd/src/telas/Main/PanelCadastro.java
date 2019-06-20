@@ -7,6 +7,7 @@ package telas.Main;
 
 import dao.UserDao;
 import javax.swing.JOptionPane;
+import org.postgresql.util.PSQLException;
 
 /**
  *
@@ -135,36 +136,33 @@ public class PanelCadastro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        if(lblNome.getText().length() == 0){
-//            System.out.println("Nome não pode ser vazio!");
-//        }
-//        else if(lblUser.getText().length() == 0){                
-//            System.out.println("Usuário não pode ficar vazio!");
-//        }
-//        else if(lblSenha.getPassword().length == 0){
-//            System.out.println("Senha não informada!");
-//        }
-//        else if(lblConfSenha.getPassword().length == 0){
-//            System.out.println("Por favor confirme a senha!");
-//        }
-//        else if(!(lblSenha.getText().equals(lblConfSenha.getText()))){
-//            System.out.println("Senhas não conferem!");
-//        }
-//        else {
-//            this.parentPane.add("Home", new PanelHome(lblUser.getText()));
-//            this.parentPane.setSelectedIndex(2);
-//            this.parentPane.setEnabledAt(0, false);                
-//            this.parentPane.setEnabledAt(1, false);
-//        }
-        boolean resultado = UserDao.inserir(lblNome.getText(), lblUser.getText(), lblSenha.getText());
-        if (resultado) {
-            JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
-        } 
-        else {
-            JOptionPane.showMessageDialog(null, "Erro!");
+        if(lblNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Nome não pode ser vazio!");            
         }
-        boolean result = UserDao.autentica(lblUser.getText(), lblSenha.getText());
-        System.out.println(result);
+        else if(lblUser.getText().length() == 0){                
+            JOptionPane.showMessageDialog(null, "Usuário não pode ficar vazio!");
+        }
+        else if(lblSenha.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Senha não informada!");
+        }
+        else if(lblConfSenha.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Por favor confirme a senha!");
+        }
+        else if(!(lblSenha.getText().equals(lblConfSenha.getText()))){
+            JOptionPane.showMessageDialog(null, "Senhas não conferem!");            
+        }
+        else {
+            boolean res = UserDao.inserir(lblNome.getText(), lblUser.getText(), lblSenha.getText());
+            if(res){
+                this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+                this.parentPane.setSelectedIndex(2);
+                this.parentPane.setEnabledAt(0, false);
+                this.parentPane.setEnabledAt(1, false);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Usuário já está em uso!");
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

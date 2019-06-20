@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Administrador
  */
-public class UserDao {
+public class PlantaDao {
 
     public static boolean inserir(String nome, String usuario, String senha) {
         String sql = "INSERT INTO usuario (nome, usuario, senha) VALUES (?, ?, ?)";
