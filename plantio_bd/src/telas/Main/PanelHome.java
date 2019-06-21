@@ -139,7 +139,7 @@ public class PanelHome extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddLavouraActionPerformed
 
     private void btnGerLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerLavouraActionPerformed
-        telas.Listagem.Lavoura lav = new telas.Listagem.Lavoura(null, true);
+        telas.Listagem.ListagemLavoura lav = new telas.Listagem.ListagemLavoura(null, true);
         lav.setVisible(true);
         lav.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnGerLavouraActionPerformed
@@ -151,13 +151,13 @@ public class PanelHome extends javax.swing.JPanel {
     }//GEN-LAST:event_addDefensivoActionPerformed
 
     private void gerDefensivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerDefensivoActionPerformed
-        telas.Listagem.Defensivo def = new telas.Listagem.Defensivo(null, true);
+        telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
         def.setVisible(true);
         def.setLocationRelativeTo(null);
     }//GEN-LAST:event_gerDefensivoActionPerformed
 
     private void gerPlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerPlantaActionPerformed
-        telas.Listagem.Planta pla = new telas.Listagem.Planta(null, true);
+        telas.Listagem.ListagemPlanta pla = new telas.Listagem.ListagemPlanta(null, true);
         pla.setVisible(true);
         pla.setLocationRelativeTo(null);
     }//GEN-LAST:event_gerPlantaActionPerformed

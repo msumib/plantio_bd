@@ -8,7 +8,10 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,43 +19,43 @@ import javax.swing.JOptionPane;
  */
 public class PlantaDao {
 
-    public static boolean inserir(String nome, String usuario, String senha) {
-        String sql = "INSERT INTO usuario (nome, usuario, senha) VALUES (?, ?, ?)";
+    public static boolean inserir(String tipo, String cultivar) {
+        String sql = "INSERT INTO planta (tipo, cultivar) VALUES (?, ?)";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, nome);
-            ps.setString(2, usuario);
-            ps.setString(3, senha);
+            ps.setString(1, tipo);
+            ps.setString(2, cultivar);
             ps.executeUpdate();
             return true;
-        } catch (SQLException | ClassNotFoundException ex) {
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
     }
     
-    public static boolean autentica(String usuario, String senha) {
-        String sql = "SELECT * FROM usuario WHERE usuario = ? and senha = ?";
+    public static List<String[]> consultar() {
+        List<String[]> resultados = new ArrayList<>();
+        String sql = "SELECT codigo, tipo, cultivar FROM planta";
+        PreparedStatement ps;
         try {
-            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, usuario);
-            ps.setString(2, senha);
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                System.out.println("Login OK!");
-                return true;
+            while (rs.next()) {
+                String[] linha = new String[3];
+                linha[0] = rs.getString("codigo");
+                linha[1] = rs.getString("tipo");
+                linha[2] = rs.getString("cultivar");
+                resultados.add(linha);
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Credenciais não conferem!");
-                return false;
-            }            
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-            return false;
-        }        
+            return resultados;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
-
-
+   
     public static void main(String[] args) {        
     }
 }

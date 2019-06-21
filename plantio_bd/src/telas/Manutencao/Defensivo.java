@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class Defensivo extends javax.swing.JDialog {
 
     /**
-     * Creates new form Defensivo
+     * Creates new form ListagemDefensivo
      */
     public Defensivo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -142,12 +142,17 @@ public class Defensivo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        boolean resultado = dao.DefensivoDao.inserir(lblNome.getText(), dropdownClasse.getSelectedItem().toString());
-        if(resultado){
-            JOptionPane.showMessageDialog(null, "Defensivo inserido.");
+        if(lblNome.getText().length() > 0){
+            boolean resultado = dao.DefensivoDao.inserir(lblNome.getText(), dropdownClasse.getSelectedItem().toString());
+            if(resultado){
+                JOptionPane.showMessageDialog(null, "Defensivo inserido.");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Erro!");
+            }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Erro!");
+            JOptionPane.showMessageDialog(null, "Campo 'nome' não pode ficar vazio!");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -156,7 +161,7 @@ public class Defensivo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        telas.Listagem.Defensivo def = new telas.Listagem.Defensivo(null, true);
+        telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
         def.setVisible(true);
         def.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed

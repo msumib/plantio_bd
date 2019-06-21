@@ -5,6 +5,8 @@
  */
 package telas.Main;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author itzfeltrin
@@ -86,21 +88,19 @@ public class PanelLogin extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(lblUser.getText().length() == 0){
-            System.out.println("O campo de usuário não pode ficar vazio!");
+            JOptionPane.showMessageDialog(null, "Usuário não informado!");
+        }
+        else if(lblSenha.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Senha não informada!");
         }
         else {
-            if(lblSenha.getPassword().length == 0){
-                System.out.println("O campo de senha não pode ficar vazio!");
-            }
-            else {
-                boolean res = dao.UserDao.autentica(lblUser.getText(), lblSenha.getText());
-                if(res){
-                    this.parentPane.add("Home", new PanelHome(lblUser.getText()));
-                    this.parentPane.setSelectedIndex(2);
-                    this.parentPane.setEnabledAt(0, false);                
-                    this.parentPane.setEnabledAt(1, false);                
-                }                
-            }
+            boolean res = dao.UserDao.autentica(lblUser.getText(), lblSenha.getText());
+            if(res){
+                this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+                this.parentPane.setSelectedIndex(2);
+                this.parentPane.setEnabledAt(0, false);                
+                this.parentPane.setEnabledAt(1, false);                
+            }                
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

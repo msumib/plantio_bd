@@ -25,7 +25,8 @@ public class UserDao {
             ps.setString(3, senha);
             ps.executeUpdate();
             return true;
-        } catch (SQLException | ClassNotFoundException ex) {
+        }
+        catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
@@ -46,7 +47,8 @@ public class UserDao {
                 JOptionPane.showMessageDialog(null, "Credenciais não conferem!");
                 return false;
             }            
-        } catch (SQLException | ClassNotFoundException ex) {
+        }
+        catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             return false;
         }        

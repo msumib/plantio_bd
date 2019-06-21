@@ -6,6 +6,7 @@
 package telas.Manutencao;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.awt.Color;
 public class Planta extends javax.swing.JDialog {
 
     /**
-     * Creates new form Planta
+     * Creates new form ListagemPlanta
      */
     public Planta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,12 +35,12 @@ public class Planta extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton6 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        lblCultivar = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        dropdownClasse = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,10 +78,10 @@ public class Planta extends javax.swing.JDialog {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Tipo:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trigo", "Aveia", "Soja", "Milho", "Fumo" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        dropdownClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trigo", "Aveia", "Soja", "Milho", "Fumo" }));
+        dropdownClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                dropdownClasseActionPerformed(evt);
             }
         });
 
@@ -109,8 +110,8 @@ public class Planta extends javax.swing.JDialog {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField5))))
+                            .addComponent(dropdownClasse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCultivar))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,11 +122,11 @@ public class Planta extends javax.swing.JDialog {
                 .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dropdownClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -138,13 +139,24 @@ public class Planta extends javax.swing.JDialog {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel8, jLabel9});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox3, jTextField5});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dropdownClasse, lblCultivar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        if(lblCultivar.getText().length() > 0){
+            boolean resultado = dao.PlantaDao.inserir(dropdownClasse.getSelectedItem().toString(), lblCultivar.getText());
+            if(resultado){
+                JOptionPane.showMessageDialog(null, "Planta Inserida.");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Erro!");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Área do cultivar não pode ficar vazia!");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -152,14 +164,14 @@ public class Planta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        telas.Listagem.Planta pla = new telas.Listagem.Planta(null, true);
+        telas.Listagem.ListagemPlanta pla = new telas.Listagem.ListagemPlanta(null, true);
         pla.setVisible(true);
         pla.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void dropdownClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownClasseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_dropdownClasseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,13 +216,13 @@ public class Planta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> dropdownClasse;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField lblCultivar;
     // End of variables declaration//GEN-END:variables
 }
