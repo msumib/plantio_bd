@@ -161,9 +161,16 @@ public class Defensivo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
-        def.setVisible(true);
-        def.setLocationRelativeTo(null);
+        if(lblNome.getText().length() == 0){
+            telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
+            def.setVisible(true);
+            def.setLocationRelativeTo(null);
+        }
+        else {
+            telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true, lblNome.getText(), dropdownClasse.getSelectedItem().toString());
+            def.setVisible(true);
+            def.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void dropdownClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownClasseActionPerformed

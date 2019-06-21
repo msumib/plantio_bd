@@ -31,6 +31,18 @@ public class ListagemPlanta extends javax.swing.JDialog {
         atualizarTabela();
     }
 
+    public ListagemPlanta(java.awt.Frame parent, boolean modal, String tipo, String cultivar) {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+        Color color = Color.decode("#a6badb");        
+        this.getContentPane().setBackground(color);
+        
+        atualizarTabela(tipo, cultivar);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,6 +155,18 @@ public class ListagemPlanta extends javax.swing.JDialog {
         modelo.addColumn("Tipo");
         modelo.addColumn("Cultivar");
         List<String[]> resultados = PlantaDao.consultar();
+        for (String[] linha : resultados) {
+            modelo.addRow(linha);
+        }
+        tabela.setModel(modelo);
+    }
+    
+    public void atualizarTabela(String tipo, String cultivar) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Cultivar");
+        List<String[]> resultados = PlantaDao.consultar(tipo, cultivar);
         for (String[] linha : resultados) {
             modelo.addRow(linha);
         }

@@ -20,18 +20,45 @@ import java.util.logging.Logger;
 public class PlantaDao {
 
     public static boolean inserir(String tipo, String cultivar) {
-        String sql = "INSERT INTO planta (tipo, cultivar) VALUES (?, ?)";
+        if(autentica(tipo, cultivar)){
+            String sql = "INSERT INTO planta (tipo, cultivar) VALUES (?, ?)";
+            try {
+                PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+                ps.setString(1, tipo);
+                ps.setString(2, cultivar);
+                ps.executeUpdate();
+                return true;
+            } 
+            catch (SQLException | ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+                return false;
+            }
+        }
+        else {
+            System.out.println("Essa planta já existe!");
+            return false;
+        }        
+    }
+    
+    public static boolean autentica(String tipo, String cultivar) {
+        String sql = "SELECT * FROM planta WHERE tipo = ? AND cultivar = ?";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, tipo);
             ps.setString(2, cultivar);
-            ps.executeUpdate();
-            return true;
-        } 
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                System.out.println("Já existe!");
+                return false;
+            }
+            else {
+                return true;
+            }            
+        }
         catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             return false;
-        }
+        }        
     }
     
     public static List<String[]> consultar() {
@@ -54,6 +81,46 @@ public class PlantaDao {
             Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    public static List<String[]> consultar(String tipo, String cultivar) {
+        List<String[]> resultados = new ArrayList<>();
+        String sql = "SELECT codigo, tipo, cultivar FROM planta WHERE tipo = ? AND cultivar = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, tipo);
+            ps.setString(2, cultivar);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String[] linha = new String[3];
+                linha[0] = rs.getString("codigo");
+                linha[1] = rs.getString("tipo");
+                linha[2] = rs.getString("cultivar");
+                resultados.add(linha);
+            }
+            return resultados;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public static boolean remove(String tipo, String cultivar){
+        String sql = "REMOVE FROM planta WHERE tipo = ? and cultivar = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, tipo);
+            ps.setString(2, cultivar);
+            ResultSet rs = ps.executeQuery();
+            return true;
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
     }
    
     public static void main(String[] args) {        

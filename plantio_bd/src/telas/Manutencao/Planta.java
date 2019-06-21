@@ -164,9 +164,16 @@ public class Planta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        telas.Listagem.ListagemPlanta pla = new telas.Listagem.ListagemPlanta(null, true);
-        pla.setVisible(true);
-        pla.setLocationRelativeTo(null);
+        if(lblCultivar.getText().length() == 0){
+            telas.Listagem.ListagemPlanta pla = new telas.Listagem.ListagemPlanta(null, true);
+            pla.setVisible(true);
+            pla.setLocationRelativeTo(null);
+        }
+        else {
+            telas.Listagem.ListagemPlanta pla = new telas.Listagem.ListagemPlanta(null, true, dropdownClasse.getSelectedItem().toString(), lblCultivar.getText());
+            pla.setVisible(true);
+            pla.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void dropdownClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownClasseActionPerformed

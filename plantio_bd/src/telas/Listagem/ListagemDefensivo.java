@@ -29,6 +29,18 @@ public class ListagemDefensivo extends javax.swing.JDialog {
         this.getContentPane().setBackground(color);
         atualizarTabela();
     }
+    
+    public ListagemDefensivo(java.awt.Frame parent, boolean modal, String nome, String classe) {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+        Color color = Color.decode("#a6badb");        
+        this.getContentPane().setBackground(color);
+        
+        atualizarTabela(nome, classe);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,6 +158,18 @@ public class ListagemDefensivo extends javax.swing.JDialog {
         modelo.addColumn("Nome");
         modelo.addColumn("Classe");
         List<String[]> resultados = DefensivoDao.consultar();
+        for (String[] linha : resultados) {
+            modelo.addRow(linha);
+        }
+        tabela.setModel(modelo);
+    }
+
+    public void atualizarTabela(String nome, String classe) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Classe");
+        List<String[]> resultados = DefensivoDao.consultar(nome, classe);
         for (String[] linha : resultados) {
             modelo.addRow(linha);
         }
