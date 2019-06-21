@@ -122,6 +122,27 @@ public class PlantaDao {
             return false;
         } 
     }
+    
+    public static boolean alterar(int codigo, String tipo, String cultivar) {
+        if(autentica(tipo, cultivar)){
+            String sql = "UPDATE planta SET tipo = ?, cultivar = ? WHERE codigo = ?";
+            try {
+                PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+                ps.setString(1, tipo);
+                ps.setString(2, cultivar);
+                ps.setInt(3, codigo);
+                ps.executeUpdate();
+                return true;
+            } catch (SQLException | ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+                return false;
+            }
+        }
+        else {
+            System.out.println("Voce nao fez nenhuma mudança.");
+            return false;
+        }
+    }
    
     public static void main(String[] args) {        
     }

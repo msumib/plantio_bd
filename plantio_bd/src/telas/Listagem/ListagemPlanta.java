@@ -9,6 +9,7 @@ import dao.PlantaDao;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import telas.Manutencao.Planta;
 
 /**
  *
@@ -30,18 +31,6 @@ public class ListagemPlanta extends javax.swing.JDialog {
         
         atualizarTabela();
     }
-
-    public ListagemPlanta(java.awt.Frame parent, boolean modal, String tipo, String cultivar) {
-        super(parent, modal);
-        initComponents();
-        setResizable(false);
-        setLocationRelativeTo(null);
-        
-        Color color = Color.decode("#a6badb");        
-        this.getContentPane().setBackground(color);
-        
-        atualizarTabela(tipo, cultivar);
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +45,7 @@ public class ListagemPlanta extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblEditar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -76,6 +65,11 @@ public class ListagemPlanta extends javax.swing.JDialog {
                 "Código", "Tipo", "Cultivar"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
@@ -87,10 +81,10 @@ public class ListagemPlanta extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Editar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        lblEditar.setText("Editar");
+        lblEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                lblEditarActionPerformed(evt);
             }
         });
 
@@ -114,7 +108,7 @@ public class ListagemPlanta extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -129,7 +123,7 @@ public class ListagemPlanta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -141,13 +135,35 @@ public class ListagemPlanta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void lblEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblEditarActionPerformed
+        if(tabela.getSelectedRow() >= 0){
+            int linhaSelecionada = tabela.getSelectedRow();
+        
+            int codigo = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString());
+            String tipo = tabela.getValueAt(linhaSelecionada, 1).toString(); //pk está na coluna 0
+            String cultivar = tabela.getValueAt(linhaSelecionada, 2).toString();
+            Planta pla = new Planta(null, true, this, codigo, tipo, cultivar);
+            pla.setVisible(true);
+        }
+    }//GEN-LAST:event_lblEditarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tabelaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMousePressed
+        if (evt.getClickCount() == 2) {
+            //obtem a linha selecionada
+            int linhaSelecionada = tabela.getSelectedRow();
+
+            //obtem a chave primária
+            int codigo = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString());
+            String tipo = tabela.getValueAt(linhaSelecionada, 1).toString(); //pk está na coluna 0
+            String cultivar = tabela.getValueAt(linhaSelecionada, 2).toString();
+            Planta pla = new Planta(null, true, this, codigo, tipo, cultivar);
+            pla.setVisible(true);
+        }
+    }//GEN-LAST:event_tabelaMousePressed
 
     public void atualizarTabela() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -220,10 +236,10 @@ public class ListagemPlanta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton lblEditar;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

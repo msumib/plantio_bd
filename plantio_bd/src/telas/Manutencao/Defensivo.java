@@ -7,6 +7,7 @@ package telas.Manutencao;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import telas.Listagem.ListagemDefensivo;
 
 /**
  *
@@ -14,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class Defensivo extends javax.swing.JDialog {
 
+    private ListagemDefensivo listagem;
+    private int codigo;
     /**
      * Creates new form ListagemDefensivo
      */
@@ -22,7 +25,26 @@ public class Defensivo extends javax.swing.JDialog {
         initComponents();
         Color color = Color.decode("#a6badb");
         this.setBackground(color);
-        setResizable(false);        
+        setResizable(false);
+                
+        btnAlterar.setEnabled(false);
+    }
+    
+    public Defensivo(java.awt.Frame parent, boolean modal, ListagemDefensivo listagem, int codigo, String nome, String classe) {
+        super(parent, modal);
+        initComponents();
+        Color color = Color.decode("#a6badb");
+        this.setBackground(color);
+        setResizable(false);     
+        setLocationRelativeTo(null);        
+        
+        this.listagem = listagem;
+        this.codigo = codigo;
+        lblNome.setText(nome);
+        dropdownClasse.setSelectedItem(classe);
+        
+        btnOk.setEnabled(false);
+        btnConsultar.setEnabled(false);
     }
 
     /**
@@ -35,40 +57,41 @@ public class Defensivo extends javax.swing.JDialog {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnOk = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         lblNome = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         dropdownClasse = new javax.swing.JComboBox<>();
+        btnAlterar = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton6.setText("OK");
-        jButton6.setPreferredSize(new java.awt.Dimension(100, 40));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnOk.setText("OK");
+        btnOk.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnOkActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Cancelar");
-        jButton7.setPreferredSize(new java.awt.Dimension(100, 40));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Consultar");
-        jButton8.setPreferredSize(new java.awt.Dimension(100, 40));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setText("Consultar");
+        btnConsultar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
 
@@ -91,6 +114,14 @@ public class Defensivo extends javax.swing.JDialog {
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,15 +131,17 @@ public class Defensivo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dropdownClasse, 0, 489, Short.MAX_VALUE)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dropdownClasse, 0, 490, Short.MAX_VALUE)
                     .addComponent(lblNome))
                 .addContainerGap())
             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -130,10 +163,11 @@ public class Defensivo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10))
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dropdownClasse, jLabel7, jLabel8, lblNome});
@@ -141,7 +175,7 @@ public class Defensivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         if(lblNome.getText().length() > 0){
             boolean resultado = dao.DefensivoDao.inserir(lblNome.getText(), dropdownClasse.getSelectedItem().toString());
             if(resultado){
@@ -154,28 +188,35 @@ public class Defensivo extends javax.swing.JDialog {
         else {
             JOptionPane.showMessageDialog(null, "Campo 'nome' não pode ficar vazio!");
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnOkActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         if(lblNome.getText().length() == 0){
             telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
             def.setVisible(true);
             def.setLocationRelativeTo(null);
         }
         else {
-            telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true, lblNome.getText(), dropdownClasse.getSelectedItem().toString());
+            telas.Listagem.ListagemDefensivo def = new telas.Listagem.ListagemDefensivo(null, true);
+            def.atualizarTabela(lblNome.getText(), dropdownClasse.getSelectedItem().toString());
             def.setVisible(true);
             def.setLocationRelativeTo(null);
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void dropdownClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownClasseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownClasseActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        dao.DefensivoDao.alterar(this.codigo, lblNome.getText(), dropdownClasse.getSelectedItem().toString());
+        this.listagem.atualizarTabela();        
+        dispose();
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,10 +261,11 @@ public class Defensivo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnOk;
     private javax.swing.JComboBox<String> dropdownClasse;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel7;

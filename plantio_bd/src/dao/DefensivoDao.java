@@ -106,6 +106,27 @@ public class DefensivoDao {
             return null;
         }
     }
+    
+    public static boolean alterar(int codigo, String nome, String classe) {
+        if(autentica(nome, classe)){
+            String sql = "UPDATE defensivo SET nome = ?, classe = ? WHERE codigo = ?";
+            try {
+                PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+                ps.setString(1, nome);
+                ps.setString(2, classe);
+                ps.setInt(3, codigo);
+                ps.executeUpdate();
+                return true;
+            } catch (SQLException | ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+                return false;
+            }
+        }
+        else {
+            System.out.println("Voce nao fez nenhuma mudança.");
+            return false;
+        }
+    }
    
     public static void main(String[] args) {        
     }
