@@ -143,6 +143,20 @@ public class PlantaDao {
             return false;
         }
     }
+    
+    public static boolean deletar(int codigo){
+        String sql = "DELETE FROM planta WHERE codigo = ?";
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ps.executeUpdate();
+            return true;
+        }
+        catch (SQLException | ClassNotFoundException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
    
     public static void main(String[] args) {        
     }
