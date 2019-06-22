@@ -42,7 +42,7 @@ public class Splash extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splash/agro(1).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/agro.png"))); // NOI18N
 
         lblNum.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         lblNum.setForeground(new java.awt.Color(51, 102, 255));

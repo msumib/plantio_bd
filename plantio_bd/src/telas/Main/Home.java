@@ -38,6 +38,7 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         mainTabbedPane = new javax.swing.JTabbedPane();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +55,15 @@ public class Home extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(720, 480));
         setMinimumSize(new java.awt.Dimension(720, 480));
         getContentPane().setLayout(null);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(670, 0, 30, 30);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
@@ -146,6 +156,10 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -185,6 +199,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
