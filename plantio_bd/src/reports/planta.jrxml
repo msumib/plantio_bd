@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3cf10fe7-020b-481c-90eb-bec1773fa2e9">
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="17"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from planta]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="cultivar" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="463" y="0" width="92" height="79" uuid="81cda86a-830a-42ec-b3a4-aef0ba516eba"/>
+				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\reports\\agro.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="0" width="167" height="20" uuid="827ef92c-acb9-4a4a-893d-9531d17e90ff"/>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="0" width="159" height="20" uuid="c5bd351d-3107-489a-a6f9-0bff7ce00d54"/>
+				<text><![CDATA[tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="0" width="163" height="20" uuid="73fea3d3-52cc-49b7-887b-3703a081cf90"/>
+				<text><![CDATA[cultivar]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="0" width="167" height="20" uuid="54c169cb-f069-47fe-b1d1-c955d80fdb14"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="159" height="20" uuid="f7580dfb-e91b-4749-856a-bd176bd71714"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="163" height="20" uuid="6565622a-0920-48bc-9c73-a55f980aa810"/>
+				<textFieldExpression><![CDATA[$F{cultivar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="419" y="34" width="92" height="20" uuid="d1052d6f-ada7-46c9-9a2f-09fe75e591c0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="511" y="34" width="44" height="20" uuid="33feb65f-79b3-4cc4-9c76-6b79f5cfb825"/>
+				<textFieldExpression><![CDATA[" "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
