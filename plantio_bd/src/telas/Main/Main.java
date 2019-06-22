@@ -60,6 +60,8 @@ public class Main {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+        
+        Thread.sleep(2000);
         while(true){
             playMusic("music/song2.wav");
             Thread.sleep(187000);
@@ -80,8 +82,6 @@ public class Main {
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
-//            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-//            gainControl.setValue(-50.0f);
             Main.clip = clip;
             Main.clip.start();
             
@@ -91,7 +91,13 @@ public class Main {
         }
     }
     
-    public static void stopMusic(){
-        Main.clip.stop();
+    public static void reduzirVolume(){
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-80.0f);
+    }
+    
+    public static void aumentarVolume(){
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(4.0f);
     }
 }

@@ -38,7 +38,7 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        lblSound = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         mainTabbedPane = new javax.swing.JTabbedPane();
         jLabel2 = new javax.swing.JLabel();
@@ -55,17 +55,17 @@ public class Home extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(720, 480));
         getContentPane().setLayout(null);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
-            }
+        lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker_on.png"))); // NOI18N
+        lblSound.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                lblSoundMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSoundMousePressed(evt);
             }
         });
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(670, 0, 30, 30);
+        getContentPane().add(lblSound);
+        lblSound.setBounds(670, 0, 30, 30);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
@@ -157,13 +157,23 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void lblSoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSoundMouseClicked
         
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_lblSoundMouseClicked
 
-    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
-        Main.stopMusic();
-    }//GEN-LAST:event_jLabel3MousePressed
+    private void lblSoundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSoundMousePressed
+        String iconfilename = lblSound.getIcon().toString();
+        String filename = iconfilename.substring(iconfilename.lastIndexOf("/") + 1);
+        if(filename.equals("speaker_on.png")){
+            Main.reduzirVolume();
+            lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker.png")));
+        }
+        else {            
+            Main.aumentarVolume();
+            lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker_on.png")));
+        }
+        
+    }//GEN-LAST:event_lblSoundMousePressed
 
     /**
      * @param args the command line arguments
@@ -204,7 +214,6 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
@@ -213,6 +222,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JLabel lblSound;
     private javax.swing.JTabbedPane mainTabbedPane;
     // End of variables declaration//GEN-END:variables
 }
