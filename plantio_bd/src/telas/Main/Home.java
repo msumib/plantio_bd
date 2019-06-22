@@ -52,12 +52,14 @@ public class Home extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(720, 480));
         setMinimumSize(new java.awt.Dimension(720, 480));
         getContentPane().setLayout(null);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
@@ -67,7 +69,6 @@ public class Home extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sistema Plantio");
         getContentPane().add(jLabel1);
@@ -159,6 +160,10 @@ public class Home extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        Main.stopMusic();
+    }//GEN-LAST:event_jLabel3MousePressed
 
     /**
      * @param args the command line arguments

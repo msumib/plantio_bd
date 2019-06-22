@@ -22,7 +22,10 @@ import splash.Splash;
  *
  * @author itzfeltrin
  */
-public class Main {
+public class Main { 
+    
+    private static Clip clip;
+    
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, InterruptedException {
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -58,7 +61,7 @@ public class Main {
             System.out.println(e.getMessage());
         }
         while(true){
-            playMusic("music\\\\song2.wav");
+            playMusic("music/song2.wav");
             Thread.sleep(187000);
         }
         
@@ -77,12 +80,18 @@ public class Main {
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-50.0f);
-            clip.start();
+//            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+//            gainControl.setValue(-50.0f);
+            Main.clip = clip;
+            Main.clip.start();
+            
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
+    }
+    
+    public static void stopMusic(){
+        Main.clip.stop();
     }
 }
