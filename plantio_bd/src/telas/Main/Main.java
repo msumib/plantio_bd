@@ -45,7 +45,9 @@ public class Main {
         Splash sp = new Splash();
         sp.setLocationRelativeTo(null);
         sp.setVisible(true);
-        Home h = new Home();       
+        Home h = new Home();
+        //System.out.println(dao.LavouraDao.getCodigo("Lavourinha", 1.5));
+        System.out.println(dao.PlantaDao.getCodigo("Fumo", "Fumo mais ou menos Bom"));
         try {
             for(int i = 0; i <= 100; i++){
                 Thread.sleep(30);
@@ -66,9 +68,6 @@ public class Main {
             playMusic();
             Thread.sleep(187000);
         }
-        
-        
-        
     }
     
     public static void playMusic(){

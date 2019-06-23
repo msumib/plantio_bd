@@ -6,10 +6,12 @@
 package telas.Manutencao;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -38,13 +40,13 @@ public class PanelAplicacao extends javax.swing.JPanel {
             comboboxClasse.addItem(linha);
         }
 
-        comboboxLavoura.removeAllItems();
-        comboboxLavoura.addItem("-");
-
-        List<String> resultadosLav = dao.LavouraDao.consultarNome();
-        for (String linha : resultadosLav) {
-            comboboxLavoura.addItem(linha);
-        }
+//        comboboxLavoura.removeAllItems();
+//        comboboxLavoura.addItem("-");
+//
+//        List<String> resultadosLav = dao.LavouraDao.consultarNome();
+//        for (String linha : resultadosLav) {
+//            comboboxLavoura.addItem(linha);
+//        }
     }
 
     /**
@@ -78,9 +80,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         btnAvancar = new javax.swing.JButton();
         btnOutro = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        comboboxLavoura = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -184,10 +184,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setText("Lavoura");
-
         jButton8.setText("Consultar");
         jButton8.setPreferredSize(new java.awt.Dimension(100, 40));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -196,14 +192,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
             }
         });
 
-        comboboxLavoura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lavoura 1", "Lavoura 2", "Lavoura 3" }));
-        comboboxLavoura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboboxLavouraActionPerformed(evt);
-            }
-        });
-
-        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Aplicação");
 
@@ -249,17 +238,14 @@ public class PanelAplicacao extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spinnerDose, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(318, 318, 318)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboboxNome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboboxClasse, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboboxLavoura, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(comboboxClasse, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,15 +282,11 @@ public class PanelAplicacao extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboboxNome, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxLavoura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(spinnerDose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -315,7 +297,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboboxClasse, comboboxLavoura, comboboxNome, jLabel10, jLabel11, jLabel7, jLabel8, jLabel9, lblData, spinnerDose});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboboxClasse, comboboxNome, jLabel10, jLabel7, jLabel8, jLabel9, lblData, spinnerDose});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -356,36 +338,118 @@ public class PanelAplicacao extends javax.swing.JPanel {
             LocalDate data = getData();
             String classe = getClasse();
             String nome = getNome();
-            String lavoura = getLavoura();
+            //String lavoura = getLavoura();
             Double dose = getDose();
-            Object[] array = {data, classe, nome, lavoura, dose};
+            Object[] array = {data, classe, nome, dose};
             this.lista.add(array);            
             
             Object[] options = {"Não", "Sim"};
             int opcao = JOptionPane.showOptionDialog(null, "Adicionar Lavoura?", "Mensagem", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if(opcao == 1){
                 PanelLavoura pl = (PanelLavoura) this.mainTabbedPane.getComponentAt(0);
-                String nomeLavoura = pl.getLabel();
-                Double extensaoLavoura = pl.getSpinner();  
-                dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
-                
-                
+                PanelProdutividade pd = (PanelProdutividade) this.mainTabbedPane.getComponent(1);
+                try {                    
+                    String nomeLavoura = pl.getLabel();
+                    Double extensaoLavoura = pl.getSpinner();  
+                    dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
+                    JOptionPane.showMessageDialog(null, "Lavoura adicionada!");
+                    this.getTopLevelAncestor().setVisible(false);
+                }
+                catch (Exception ex){
+                    JOptionPane.showMessageDialog(null, "Conteúdo faltando!");
+                    this.mainTabbedPane.setSelectedIndex(0);
+                }
+                try {                    
+                    ArrayList<Object[]> lista = pd.getLista();
+                    int cod_lav = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());    
+                    for(Object[] obj : lista){                        
+                        int qtd = (Integer) obj[0];
+                        short safra = (short) obj[1];                        
+                        int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
+                        try {
+                            dao.LavouraPlantaDao.inserir(pd.getDataProd().toString(), cod_lav, cod_planta);
+                            dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
+                            this.getTopLevelAncestor().setVisible(false);
+                        }
+                        catch (Exception ex){
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        }                        
+                    }
+                }
+                catch (NullPointerException ex){
+                    System.out.println("Deu erro nullpointer: " + ex.getMessage());
+                }
             }
         
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.out.println(ex.getMessage());
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Deseja adicionar a lavoura sem nenhuma Aplicação?", "Mensagem", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                PanelLavoura pl = (PanelLavoura) this.mainTabbedPane.getComponentAt(0);
+                PanelProdutividade pd = (PanelProdutividade) this.mainTabbedPane.getComponent(1);
+                try {                    
+                    String nomeLavoura = pl.getLabel();
+                    Double extensaoLavoura = pl.getSpinner();  
+                    try {
+                        dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
+                        JOptionPane.showMessageDialog(null, "Lavoura adicionada!");
+                        this.getTopLevelAncestor().setVisible(false);
+                        System.out.println("adicionou a lavoura");
+                    }
+                    catch(Exception ex2){
+                        JOptionPane.showMessageDialog(null, ex2.getMessage());
+                        System.out.println("deu erro aqui");
+                    }
+                    try {                    
+                        System.out.println("entrou aqui");
+                        ArrayList<Object[]> lista = pd.getLista();
+                        int cod_lav = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());    
+                        for(Object[] obj : lista){                        
+                            int qtd = (Integer) obj[0];
+                            short safra = (short) obj[1];
+                            System.out.println("chegou ate aqui primo");
+                            int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
+                            try {
+                                System.out.println("aqui foi");
+                                System.out.println(pd.getDataProd().toString());
+                                
+                                dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
+                                System.out.println("produtividade foi");
+                                dao.LavouraPlantaDao.inserir(pd.getDataProd().toString(), cod_lav, cod_planta);
+                                this.getTopLevelAncestor().setVisible(false);
+                            }
+                            catch (Exception ex2){
+                                System.out.println("aqui nao foi");
+                                JOptionPane.showMessageDialog(null, ex2.getMessage());
+                            }                        
+                        }
+                    }
+                    catch (Exception ex3){
+                        System.out.println("Deu erro nullpointer: " + ex3.getMessage());
+                    }
+                }
+                catch (Exception ex3){
+                    JOptionPane.showMessageDialog(null, "Conteúdo faltando!");
+                    this.mainTabbedPane.setSelectedIndex(0);
+                }
+                
+            }
+            else {
+                JOptionPane.showConfirmDialog(null, "Lavoura não foi adicionada.");
+            }
         }
 
     }//GEN-LAST:event_btnAvancarActionPerformed
-
+    
     private void btnOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutroActionPerformed
         try {
             LocalDate data = getData();
             String classe = getClasse();
             String nome = getNome();
-            String lavoura = getLavoura();
+            //String lavoura = getLavoura();
             Double dose = getDose();
-            Object[] array = {data, classe, nome, lavoura, dose};
+            Object[] array = {data, classe, nome, dose};
             this.lista.add(array);
             
             clearScreen();
@@ -400,10 +464,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
         lav.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void comboboxLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxLavouraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboboxLavouraActionPerformed
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         this.getTopLevelAncestor().setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -414,7 +474,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
             LocalDate ld = LocalDate.parse(lblData.getText(), df);
             return ld;
         } else {
-            throw new Exception("Data inválida");
+            throw new Exception("Aplicacao - Data inválida");
         }
     }
 
@@ -434,13 +494,13 @@ public class PanelAplicacao extends javax.swing.JPanel {
         }
     }
 
-    public String getLavoura() throws Exception {
-        if (comboboxLavoura.getSelectedIndex() > 0) {
-            return comboboxLavoura.getSelectedItem().toString();
-        } else {
-            throw new Exception("Lavoura inválida.");
-        }
-    }
+//    public String getLavoura() throws Exception {
+//        if (comboboxLavoura.getSelectedIndex() > 0) {
+//            return comboboxLavoura.getSelectedItem().toString();
+//        } else {
+//            throw new Exception("Lavoura inválida.");
+//        }
+//    }
 
     public Double getDose() throws Exception {
         if (Double.parseDouble(spinnerDose.getValue().toString()) > 0) {
@@ -454,7 +514,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         lblData.setText("");
         comboboxClasse.setSelectedIndex(0);
         comboboxNome.setSelectedIndex(0);
-        comboboxLavoura.setSelectedIndex(0);
+        //comboboxLavoura.setSelectedIndex(0);
         spinnerDose.setValue(0);
 
     }
@@ -463,7 +523,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
     private javax.swing.JButton btnAvancar;
     private javax.swing.JButton btnOutro;
     private javax.swing.JComboBox<String> comboboxClasse;
-    private javax.swing.JComboBox<String> comboboxLavoura;
     private javax.swing.JComboBox<String> comboboxNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -475,7 +534,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;

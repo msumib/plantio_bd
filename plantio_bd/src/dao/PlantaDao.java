@@ -144,6 +144,25 @@ public class PlantaDao {
         }
     }
     
+    public static int getCodigo(String classe, String cultivar){
+        String sql = "SELECT codigo FROM planta WHERE tipo = ? AND cultivar = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, classe);
+            ps.setString(2, cultivar);
+            ResultSet rs = ps.executeQuery();
+            int codigo = 0;
+            while(rs.next()){
+                codigo = rs.getInt("codigo");
+            }
+            return codigo;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+    
     public static boolean remove(String tipo, String cultivar){
         String sql = "REMOVE FROM planta WHERE tipo = ? and cultivar = ?";
         PreparedStatement ps;

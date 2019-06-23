@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class LavouraDao 
 {
-    public static boolean inserir(String nome, Double extensao_ha) {
+    public static boolean inserir(String nome, Double extensao_ha) throws Exception {
         if(autentica(nome, extensao_ha)){
             String sql = "INSERT INTO lavoura (nome, extensao_ha) VALUES (?, ?)";
             try {
@@ -30,8 +30,7 @@ public class LavouraDao
             }
         }
         else {
-            System.out.println("Lavoura já existe!");
-            return false;
+            throw new Exception("Essa lavoura já existe!");            
         }
     }
     
@@ -121,6 +120,26 @@ public class LavouraDao
         }
     }
     
+    public static int getCodigo(String nome, Double area){
+        String sql = "SELECT codigo FROM lavoura WHERE nome = ? AND extensao_ha = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, nome);
+            ps.setDouble(2, area);
+            ResultSet rs = ps.executeQuery();
+            int codigo = 0;
+            while(rs.next()){
+                codigo = rs.getInt("codigo");
+            }
+            return codigo;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("teu rs tá errado fi");
+            return 0;            
+        }
+    }
+        
     public static boolean alterar(int codigo, String nome, Double extensao_ha) {
         if(autentica(nome, extensao_ha)){
             String sql = "UPDATE lavoura SET nome = ?, extensao_ha = ? WHERE codigo = ?";

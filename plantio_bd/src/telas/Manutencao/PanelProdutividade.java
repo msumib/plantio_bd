@@ -6,6 +6,7 @@
 package telas.Manutencao;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,8 +30,9 @@ public class PanelProdutividade extends javax.swing.JPanel {
         comboboxCultivar.setEnabled(false);
         
         LocalDate ld = LocalDate.now();
-        int ano = ld.getYear();
-        spinnerAno.setModel(new javax.swing.SpinnerNumberModel(ano, 1900, ano, 1));
+        Short ano = Short.parseShort(Integer.toString(ld.getYear()));
+        //spinnerAno.setModel(new javax.swing.SpinnerNumberModel(ano, 1900, ano, 1));
+        spinnerAno.setModel(new javax.swing.SpinnerNumberModel(Integer.parseInt(Short.toString(ano)), 1900, Integer.parseInt(Short.toString(ano)), 1));
         
         comboboxPlanta.removeAllItems();
         comboboxPlanta.addItem("-");
@@ -58,6 +60,8 @@ public class PanelProdutividade extends javax.swing.JPanel {
         spinnerQtd = new javax.swing.JSpinner();
         spinnerAno = new javax.swing.JSpinner();
         btnOutro = new javax.swing.JButton();
+        lblData = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         btnAvancar.setText("Avançar");
         btnAvancar.setPreferredSize(new java.awt.Dimension(100, 40));
@@ -87,7 +91,7 @@ public class PanelProdutividade extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Quantidade em sacas:");
 
-        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Produtividade");
 
@@ -127,6 +131,10 @@ public class PanelProdutividade extends javax.swing.JPanel {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Data de Plantio (dd/MM/yyyy):");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +167,11 @@ public class PanelProdutividade extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,7 +179,7 @@ public class PanelProdutividade extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel18)
-                .addGap(94, 94, 94)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(spinnerQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,7 +193,11 @@ public class PanelProdutividade extends javax.swing.JPanel {
                     .addComponent(comboboxCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(comboboxPlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -199,16 +215,21 @@ public class PanelProdutividade extends javax.swing.JPanel {
     private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
         try {
             Integer qtd = getQtd();
-            Integer ano = getSafra();
+            Short ano = Short.parseShort(Integer.toString(getSafra()));
             String planta = getPlanta();
             String cultivar = getCultivar();
-            Object[] array = {qtd, ano, planta, cultivar};
+            LocalDate ld = getDataProd();
+            Object[] array = {qtd, ano, planta, cultivar, ld};
             this.lista.add(array);
 
             this.mainTabbedPane.setSelectedIndex(this.mainTabbedPane.getSelectedIndex() + 1);
         }
         catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Deseja continuar sem adicionar Produtividade?", "Mensagem", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                this.mainTabbedPane.setSelectedIndex(this.mainTabbedPane.getSelectedIndex() + 1);
+            }            
         }    
     }//GEN-LAST:event_btnAvancarActionPerformed
 
@@ -246,10 +267,11 @@ public class PanelProdutividade extends javax.swing.JPanel {
     private void btnOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutroActionPerformed
         try {
             Integer qtd = getQtd();
-            Integer ano = getSafra();
+            Short ano = Short.parseShort(Integer.toString(getSafra()));
             String planta = getPlanta();
             String cultivar = getCultivar();
-            Object[] array = {qtd, ano, planta, cultivar};
+            LocalDate ld = getDataProd();
+            Object[] array = {qtd, ano, planta, cultivar, ld};
             this.lista.add(array);
             
             clearScreen();
@@ -295,6 +317,20 @@ public class PanelProdutividade extends javax.swing.JPanel {
         }
     }
     
+    public LocalDate getDataProd() throws Exception {
+        if (lblData.getText().length() > 0) {
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate ld = LocalDate.parse(lblData.getText(), df);
+            return ld;
+        } else {
+            throw new Exception("Data inválida");
+        }
+    }
+    
+    public ArrayList<Object[]> getLista(){
+        return this.lista;
+    }
+    
     public void clearScreen(){
         LocalDate ld = LocalDate.now();
         int ano = ld.getYear();
@@ -313,10 +349,12 @@ public class PanelProdutividade extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField lblData;
     private javax.swing.JSpinner spinnerAno;
     private javax.swing.JSpinner spinnerQtd;
     // End of variables declaration//GEN-END:variables
