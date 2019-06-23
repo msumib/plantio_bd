@@ -5,6 +5,7 @@
  */
 package telas.Main;
 
+import java.awt.Desktop;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,13 +15,15 @@ import javax.swing.JOptionPane;
 public class PanelLogin extends javax.swing.JPanel {
 
     private javax.swing.JTabbedPane parentPane;
+    private javax.swing.JMenu menu;
     
     /**
      * Creates new form PanelLogin
      */
-    public PanelLogin(javax.swing.JTabbedPane mainTabbedPane) {
+    public PanelLogin(javax.swing.JMenu menu, javax.swing.JTabbedPane mainTabbedPane) {
         initComponents();
         this.parentPane = mainTabbedPane;
+        this.menu = menu;
     }
 
     /**
@@ -96,10 +99,12 @@ public class PanelLogin extends javax.swing.JPanel {
         else {
             boolean res = dao.UserDao.autentica(lblUser.getText(), lblSenha.getText());
             if(res){
-                this.parentPane.add("Home", new PanelHome(lblUser.getText()));
+                PanelHome home = new PanelHome(lblUser.getText());
+                this.parentPane.add("Home", home);
                 this.parentPane.setSelectedIndex(2);
                 this.parentPane.setEnabledAt(0, false);                
-                this.parentPane.setEnabledAt(1, false);                
+                this.parentPane.setEnabledAt(1, false);
+                menu.setEnabled(true);
             }                
         }
     }//GEN-LAST:event_jButton1ActionPerformed

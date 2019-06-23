@@ -45,7 +45,7 @@ public class Main {
         Splash sp = new Splash();
         sp.setLocationRelativeTo(null);
         sp.setVisible(true);
-        Home h = new Home();        
+        Home h = new Home();       
         try {
             for(int i = 0; i <= 100; i++){
                 Thread.sleep(30);
@@ -67,6 +67,8 @@ public class Main {
             Thread.sleep(187000);
         }
         
+        
+        
     }
     
     public static void playMusic(String filepath){
@@ -84,7 +86,9 @@ public class Main {
             clip.open(stream);
             Main.clip = clip;
             Main.clip.start();
-            
+            reduzirVolume();
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-40.0f);
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -98,6 +102,6 @@ public class Main {
     
     public static void aumentarVolume(){
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(4.0f);
-    }
+        gainControl.setValue(-40.0f);
+    }   
 }

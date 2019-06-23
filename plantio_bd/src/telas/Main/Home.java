@@ -6,8 +6,6 @@
 package telas.Main;
 
 import javax.swing.JOptionPane;
-import splash.Splash;
-
 /**
  *
  * @author itzfeltrin
@@ -23,11 +21,14 @@ public class Home extends javax.swing.JFrame {
             setResizable(false);
             setLocationRelativeTo(null);
             setTitle("Program");
+            menuGerarRelatorio.setEnabled(false);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +49,10 @@ public class Home extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuGerarRelatorio = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,7 +78,7 @@ public class Home extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 0, 690, 70);
 
-        mainTabbedPane.add("Login", new PanelLogin(mainTabbedPane));
+        mainTabbedPane.add("Login", new PanelLogin(this.menuGerarRelatorio, mainTabbedPane));
         mainTabbedPane.add("Cadastro", new PanelCadastro(mainTabbedPane));
 
         getContentPane().add(mainTabbedPane);
@@ -114,8 +118,33 @@ public class Home extends javax.swing.JFrame {
         jMenu2.setText("Relatório");
         jMenu2.setMargin(new java.awt.Insets(0, 0, 0, 10));
 
-        jMenuItem4.setText("Gerar Relatório");
-        jMenu2.add(jMenuItem4);
+        menuGerarRelatorio.setText("Gerar Relatório");
+
+        jMenuItem5.setText("Defensivo");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuGerarRelatorio.add(jMenuItem5);
+
+        jMenuItem6.setText("Planta");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menuGerarRelatorio.add(jMenuItem6);
+
+        jMenuItem7.setText("Lavoura");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        menuGerarRelatorio.add(jMenuItem7);
+
+        jMenu2.add(menuGerarRelatorio);
 
         jMenuBar1.add(jMenu2);
 
@@ -162,7 +191,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSoundMouseClicked
 
     private void lblSoundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSoundMousePressed
-        String iconfilename = lblSound.getIcon().toString();
+       String iconfilename = lblSound.getIcon().toString();
         String filename = iconfilename.substring(iconfilename.lastIndexOf("/") + 1);
         if(filename.equals("speaker_on.png")){
             Main.reduzirVolume();
@@ -171,13 +200,21 @@ public class Home extends javax.swing.JFrame {
         else {            
             Main.aumentarVolume();
             lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker_on.png")));
-        }
-        
+        }        
     }//GEN-LAST:event_lblSoundMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        reports.GerarRelatorio.gerarDefensivo();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        reports.GerarRelatorio.gerarPlanta();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -221,8 +258,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JLabel lblSound;
     private javax.swing.JTabbedPane mainTabbedPane;
+    private javax.swing.JMenu menuGerarRelatorio;
     // End of variables declaration//GEN-END:variables
 }
