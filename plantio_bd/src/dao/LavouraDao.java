@@ -14,13 +14,13 @@ import java.util.logging.Logger;
  */
 public class LavouraDao 
 {
-    public static boolean inserir(String nome, Float extensao_ha) {
+    public static boolean inserir(String nome, Double extensao_ha) {
         if(autentica(nome, extensao_ha)){
             String sql = "INSERT INTO lavoura (nome, extensao_ha) VALUES (?, ?)";
             try {
                 PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
                 ps.setString(1, nome);
-                ps.setFloat(2, extensao_ha);
+                ps.setDouble(2, extensao_ha);
                 ps.executeUpdate();
                 return true;
             }
@@ -35,12 +35,12 @@ public class LavouraDao
         }
     }
     
-    public static boolean autentica(String nome, Float extensao_ha) {
+    public static boolean autentica(String nome, Double extensao_ha) {
         String sql = "SELECT * FROM lavoura WHERE nome = ? and extensao_ha = ?";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, nome);
-            ps.setFloat(2, extensao_ha);
+            ps.setDouble(2, extensao_ha);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 System.out.println("Já existe!");
@@ -54,6 +54,25 @@ public class LavouraDao
             System.out.println(ex.getMessage());
             return false;
         }        
+    }
+    
+    public static List<String> consultarNome() {
+        List<String> resultados = new ArrayList<>();
+        String sql = "SELECT nome FROM lavoura";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String linha = rs.getString("nome");
+                resultados.add(linha);
+            }
+            return resultados;
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public static List<String[]> consultar() {
@@ -78,14 +97,14 @@ public class LavouraDao
         }
     }
     
-    public static List<String[]> consultar(String nome, Float extensao_ha) {
+    public static List<String[]> consultar(String nome, Double extensao_ha) {
         List<String[]> resultados = new ArrayList<>();
         String sql = "SELECT codigo, nome, extensao_ha FROM lavoura WHERE nome = ? AND defensivo_ha = ?";
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, nome);
-            ps.setFloat(2, extensao_ha);
+            ps.setDouble(2, extensao_ha);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String[] linha = new String[3];
@@ -102,13 +121,13 @@ public class LavouraDao
         }
     }
     
-    public static boolean alterar(int codigo, String nome, Float extensao_ha) {
+    public static boolean alterar(int codigo, String nome, Double extensao_ha) {
         if(autentica(nome, extensao_ha)){
             String sql = "UPDATE lavoura SET nome = ?, extensao_ha = ? WHERE codigo = ?";
             try {
                 PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
                 ps.setString(1, nome);
-                ps.setFloat(2, extensao_ha);
+                ps.setDouble(2, extensao_ha);
                 ps.setInt(3, codigo);
                 ps.executeUpdate();
                 return true;

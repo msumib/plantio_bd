@@ -83,6 +83,43 @@ public class DefensivoDao {
         }
     }
     
+    public static List<String> consultarDisintct() {
+        ArrayList<String> lista = new ArrayList<>();
+        String sql = "SELECT DISTINCT(classe) FROM defensivo";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("classe"));
+            }
+            return lista;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public static List<String> consultarNome(String classe) {
+        ArrayList<String> lista = new ArrayList<>();
+        String sql = "SELECT nome FROM defensivo WHERE classe = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, classe);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("nome"));
+            }
+            return lista;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public static List<String[]> consultar(String nome, String classe) {
         List<String[]> resultados = new ArrayList<>();
         String sql = "SELECT codigo, nome, classe FROM defensivo WHERE nome = ? AND classe = ?";

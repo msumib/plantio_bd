@@ -41,7 +41,7 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="setTitle(&quot;Info Lavoura&quot;);&#xa;jTabbedPane1.add(&quot;Lavoura&quot;, new PanelLavoura());&#xa;jTabbedPane1.add(&quot;Produtividade da Lavoura&quot;, new telas.Manutencao.PanelProdutividade());&#xa;jTabbedPane1.add(&quot;Aplica&#xe7;&#xe3;o da Lavoura&quot;, new PanelAplicacao());&#xa;jTabbedPane1.add(&quot;Rela&#xe7;&#xe3;o Lavoura/Planta&quot;, new PanelLavouraPlanta());"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="setTitle(&quot;Info Lavoura&quot;);&#xa;jTabbedPane1.add(&quot;Lavoura&quot;, new PanelLavoura(jTabbedPane1));&#xa;jTabbedPane1.add(&quot;Produtividade da Lavoura&quot;, new telas.Manutencao.PanelProdutividade(jTabbedPane1));&#xa;jTabbedPane1.add(&quot;Aplica&#xe7;&#xe3;o da Lavoura&quot;, new PanelAplicacao(jTabbedPane1));&#xa;//jTabbedPane1.add(&quot;Rela&#xe7;&#xe3;o Lavoura/Planta&quot;, new PanelLavouraPlanta(jTabbedPane1));"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

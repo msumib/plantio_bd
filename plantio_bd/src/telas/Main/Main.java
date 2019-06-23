@@ -63,7 +63,7 @@ public class Main {
         
         Thread.sleep(2000);
         while(true){
-            playMusic("music/song2.wav");
+            playMusic();
             Thread.sleep(187000);
         }
         
@@ -71,9 +71,9 @@ public class Main {
         
     }
     
-    public static void playMusic(String filepath){
+    public static void playMusic(){
         try {
-            File yourFile = new File(filepath);
+            File yourFile = new File("music/song2.wav");
             AudioInputStream stream;
             AudioFormat format;
             DataLine.Info info;
@@ -86,7 +86,6 @@ public class Main {
             clip.open(stream);
             Main.clip = clip;
             Main.clip.start();
-            reduzirVolume();
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-40.0f);
         }
@@ -95,13 +94,7 @@ public class Main {
         }
     }
     
-    public static void reduzirVolume(){
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-80.0f);
-    }
-    
-    public static void aumentarVolume(){
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-40.0f);
-    }   
+    public static void stopMusic(){
+        Main.clip.stop();
+    }  
 }

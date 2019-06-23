@@ -85,13 +85,32 @@ public class PlantaDao {
     
     public static List<String> consultarDisintct() {
         ArrayList<String> lista = new ArrayList<>();
-        String sql = "SELECT DISTINCT(tipo) cultivar FROM planta";
+        String sql = "SELECT DISTINCT(tipo) FROM planta";
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(rs.getString("tipo"));
+            }
+            return lista;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public static List<String> consultarCultivar(String tipo) {
+        ArrayList<String> lista = new ArrayList<>();
+        String sql = "SELECT cultivar FROM planta WHERE tipo = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, tipo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("cultivar"));
             }
             return lista;
         } 

@@ -194,11 +194,11 @@ public class Home extends javax.swing.JFrame {
        String iconfilename = lblSound.getIcon().toString();
         String filename = iconfilename.substring(iconfilename.lastIndexOf("/") + 1);
         if(filename.equals("speaker_on.png")){
-            Main.reduzirVolume();
+            Main.stopMusic();
             lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker.png")));
         }
         else {            
-            Main.aumentarVolume();
+            Main.playMusic();
             lblSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/speaker_on.png")));
         }        
     }//GEN-LAST:event_lblSoundMousePressed

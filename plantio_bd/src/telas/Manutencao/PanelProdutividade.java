@@ -5,7 +5,10 @@
  */
 package telas.Manutencao;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,13 +16,22 @@ import java.util.List;
  */
 public class PanelProdutividade extends javax.swing.JPanel {
 
+    private ArrayList<Object[]> lista = new ArrayList<>();
+    private javax.swing.JTabbedPane mainTabbedPane;
+    
     /**
-     * Creates new form PanelLavouraProdutividade
+     * Creates new form PanelAplicacao
      */
-    public PanelProdutividade() {
+    public PanelProdutividade(javax.swing.JTabbedPane mainTabbedPane) {
         initComponents();
+        this.mainTabbedPane = mainTabbedPane;
         comboboxCultivar.removeAllItems();
         comboboxCultivar.setEnabled(false);
+        
+        LocalDate ld = LocalDate.now();
+        int ano = ld.getYear();
+        spinnerAno.setModel(new javax.swing.SpinnerNumberModel(ano, 1900, ano, 1));
+        
         comboboxPlanta.removeAllItems();
         comboboxPlanta.addItem("-");
         
@@ -28,32 +40,30 @@ public class PanelProdutividade extends javax.swing.JPanel {
             comboboxPlanta.addItem(linha);
         }
     }
-
-    
-     
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton6 = new javax.swing.JButton();
+        btnAvancar = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         comboboxCultivar = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         comboboxPlanta = new javax.swing.JComboBox<>();
+        spinnerQtd = new javax.swing.JSpinner();
+        spinnerAno = new javax.swing.JSpinner();
+        btnOutro = new javax.swing.JButton();
 
-        jButton6.setText("OK");
-        jButton6.setPreferredSize(new java.awt.Dimension(100, 40));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnAvancar.setText("Avançar");
+        btnAvancar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnAvancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAvancarActionPerformed(evt);
             }
         });
 
@@ -107,6 +117,16 @@ public class PanelProdutividade extends javax.swing.JPanel {
             }
         });
 
+        spinnerQtd.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        btnOutro.setText("Outro");
+        btnOutro.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnOutro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,8 +141,6 @@ public class PanelProdutividade extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -130,12 +148,16 @@ public class PanelProdutividade extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(comboboxCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(comboboxCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spinnerQtd)
+                            .addComponent(spinnerAno)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -145,37 +167,50 @@ public class PanelProdutividade extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel18)
-                .addGap(114, 114, 114)
+                .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(comboboxCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(comboboxPlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10))
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboboxCultivar, comboboxPlanta, jTextField4, jTextField5});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboboxCultivar, comboboxPlanta, jLabel10, jLabel7, jLabel8, jLabel9, spinnerQtd});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
+        try {
+            Integer qtd = getQtd();
+            Integer ano = getSafra();
+            String planta = getPlanta();
+            String cultivar = getCultivar();
+            Object[] array = {qtd, ano, planta, cultivar};
+            this.lista.add(array);
+
+            this.mainTabbedPane.setSelectedIndex(this.mainTabbedPane.getSelectedIndex() + 1);
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }    
+    }//GEN-LAST:event_btnAvancarActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.getTopLevelAncestor().setVisible(false);
@@ -192,15 +227,89 @@ public class PanelProdutividade extends javax.swing.JPanel {
     }//GEN-LAST:event_comboboxCultivarActionPerformed
 
     private void comboboxPlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxPlantaActionPerformed
-        // TODO add your handling code here:
+        comboboxCultivar.removeAllItems();
+        comboboxCultivar.addItem("-");
+        comboboxCultivar.setEnabled(true);
+        if(comboboxPlanta.getSelectedIndex() > 0){
+            List<String> resultados = dao.PlantaDao.consultarCultivar(comboboxPlanta.getSelectedItem().toString());
+            for (String linha : resultados) {
+                comboboxCultivar.addItem(linha);
+            }
+        }
+        else {
+            comboboxCultivar.removeAllItems();
+            comboboxCultivar.addItem("-");
+            comboboxCultivar.setEnabled(false);
+        }
     }//GEN-LAST:event_comboboxPlantaActionPerformed
 
+    private void btnOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutroActionPerformed
+        try {
+            Integer qtd = getQtd();
+            Integer ano = getSafra();
+            String planta = getPlanta();
+            String cultivar = getCultivar();
+            Object[] array = {qtd, ano, planta, cultivar};
+            this.lista.add(array);
+            
+            clearScreen();
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } 
+    }//GEN-LAST:event_btnOutroActionPerformed
+
+    public Integer getQtd() throws Exception{
+        if(Integer.parseInt(spinnerQtd.getValue().toString()) > 0){            
+            return Integer.parseInt(spinnerQtd.getValue().toString());
+        }
+        else {            
+            throw new Exception("Quantidade deve ser maior que 0!");
+        }
+    }
+
+    public Integer getSafra() throws Exception{
+        if(Integer.parseInt(spinnerAno.getValue().toString()) > 0){            
+            return Integer.parseInt(spinnerAno.getValue().toString());
+        }
+        else {
+            throw new Exception("Ano inválido.");
+        }
+    }
+    
+    public String getPlanta() throws Exception{
+        if(comboboxPlanta.getSelectedIndex() > 0){
+            return comboboxPlanta.getSelectedItem().toString();
+        }
+        else {
+            throw new Exception("Planta inválida.");
+        }
+    }
+    
+    public String getCultivar() throws Exception{
+        if(comboboxCultivar.getSelectedIndex() > 0){
+            return comboboxCultivar.getSelectedItem().toString();
+        }
+        else {
+            throw new Exception("Cultivar inválido.");
+        }
+    }
+    
+    public void clearScreen(){
+        LocalDate ld = LocalDate.now();
+        int ano = ld.getYear();
+        spinnerAno.setValue(ano);
+        spinnerQtd.setValue(1);
+        comboboxCultivar.setSelectedIndex(0);
+        comboboxPlanta.setSelectedIndex(0);
+    }
        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvancar;
+    private javax.swing.JButton btnOutro;
     private javax.swing.JComboBox<String> comboboxCultivar;
     private javax.swing.JComboBox<String> comboboxPlanta;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel10;
@@ -208,8 +317,8 @@ public class PanelProdutividade extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JSpinner spinnerAno;
+    private javax.swing.JSpinner spinnerQtd;
     // End of variables declaration//GEN-END:variables
 }
 

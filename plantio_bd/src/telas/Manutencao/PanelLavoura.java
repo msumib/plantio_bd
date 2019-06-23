@@ -5,7 +5,7 @@
  */
 package telas.Manutencao;
 
-import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +13,14 @@ import java.awt.Color;
  */
 public class PanelLavoura extends javax.swing.JPanel {
 
+    private javax.swing.JTabbedPane mainTabbedPane;
+    
     /**
-     * Creates new form PanelLavoura
+     * Creates new form PanelAplicacao
      */
-    public PanelLavoura() {
+    public PanelLavoura(javax.swing.JTabbedPane mainTabbedPane) {
         initComponents();
+        this.mainTabbedPane = mainTabbedPane;
     }
 
     /**
@@ -33,10 +36,10 @@ public class PanelLavoura extends javax.swing.JPanel {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        lblNomeLavoura = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerExtensaoLavoura = new javax.swing.JSpinner();
 
         setMaximumSize(new java.awt.Dimension(400, 215));
 
@@ -76,6 +79,8 @@ public class PanelLavoura extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Extensão em ha.:");
 
+        spinnerExtensaoLavoura.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, null, 0.1d));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,8 +102,8 @@ public class PanelLavoura extends javax.swing.JPanel {
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSpinner1))))
+                            .addComponent(lblNomeLavoura, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(spinnerExtensaoLavoura))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,11 +114,11 @@ public class PanelLavoura extends javax.swing.JPanel {
                 .addGap(121, 121, 121)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNomeLavoura, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerExtensaoLavoura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -124,12 +129,20 @@ public class PanelLavoura extends javax.swing.JPanel {
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel7, jLabel8, jTextField4});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel7, jLabel8, lblNomeLavoura});
 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        try {            
+            String st = getLabel();
+            double nr = getSpinner();
+                    
+            this.mainTabbedPane.setSelectedIndex(this.mainTabbedPane.getSelectedIndex() + 1);
+        }        
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -142,6 +155,23 @@ public class PanelLavoura extends javax.swing.JPanel {
         lav.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    public String getLabel() throws Exception{
+        if(lblNomeLavoura.getText().length() > 0){            
+            return lblNomeLavoura.getText();            
+        }
+        else {            
+            throw new Exception("Nome da lavoura não pode ficar vazio!");
+        }
+    }
+
+    public double getSpinner() throws Exception{
+        if(Double.parseDouble(spinnerExtensaoLavoura.getValue().toString()) > 0){
+            return Double.parseDouble(spinnerExtensaoLavoura.getValue().toString());
+        }
+        else {
+            throw new Exception("Extensão da lavoura tem que ser maior que 0.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton6;
@@ -150,7 +180,7 @@ public class PanelLavoura extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField lblNomeLavoura;
+    private javax.swing.JSpinner spinnerExtensaoLavoura;
     // End of variables declaration//GEN-END:variables
 }

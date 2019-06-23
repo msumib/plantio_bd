@@ -38,8 +38,8 @@ public class PanelHome extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblLogText = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnAddLavoura = new javax.swing.JButton();
-        btnGerLavoura = new javax.swing.JButton();
+        addLavoura = new javax.swing.JButton();
+        getLavoura = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         addDefensivo = new javax.swing.JButton();
@@ -63,23 +63,23 @@ public class PanelHome extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(20, 30, 85, 40);
 
-        btnAddLavoura.setText("Adicionar");
-        btnAddLavoura.addActionListener(new java.awt.event.ActionListener() {
+        addLavoura.setText("Adicionar");
+        addLavoura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddLavouraActionPerformed(evt);
+                addLavouraActionPerformed(evt);
             }
         });
-        add(btnAddLavoura);
-        btnAddLavoura.setBounds(140, 30, 90, 40);
+        add(addLavoura);
+        addLavoura.setBounds(140, 30, 90, 40);
 
-        btnGerLavoura.setText("Gerenciar");
-        btnGerLavoura.addActionListener(new java.awt.event.ActionListener() {
+        getLavoura.setText("Gerenciar");
+        getLavoura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerLavouraActionPerformed(evt);
+                getLavouraActionPerformed(evt);
             }
         });
-        add(btnGerLavoura);
-        btnGerLavoura.setBounds(240, 30, 90, 40);
+        add(getLavoura);
+        getLavoura.setBounds(240, 30, 90, 40);
         add(jSeparator1);
         jSeparator1.setBounds(-30, 200, 830, 10);
 
@@ -132,17 +132,17 @@ public class PanelHome extends javax.swing.JPanel {
         jSeparator2.setBounds(0, 90, 720, 10);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLavouraActionPerformed
+    private void addLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLavouraActionPerformed
         Lavoura lav = new Lavoura(null, true);
         lav.setVisible(true);
         lav.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnAddLavouraActionPerformed
+    }//GEN-LAST:event_addLavouraActionPerformed
 
-    private void btnGerLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerLavouraActionPerformed
+    private void getLavouraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLavouraActionPerformed
         telas.Listagem.ListagemLavoura lav = new telas.Listagem.ListagemLavoura(null, true);
         lav.setVisible(true);
         lav.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnGerLavouraActionPerformed
+    }//GEN-LAST:event_getLavouraActionPerformed
 
     private void addDefensivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDefensivoActionPerformed
         Defensivo def = new Defensivo(null, true);
@@ -171,11 +171,11 @@ public class PanelHome extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDefensivo;
+    private javax.swing.JButton addLavoura;
     private javax.swing.JButton addPlanta;
-    private javax.swing.JButton btnAddLavoura;
-    private javax.swing.JButton btnGerLavoura;
     private javax.swing.JButton gerDefensivo;
     private javax.swing.JButton gerPlanta;
+    private javax.swing.JButton getLavoura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
