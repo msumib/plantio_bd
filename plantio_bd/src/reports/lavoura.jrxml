@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="238d6895-273e-4668-bce3-d5b9365f2d3d">
+	<property name="ireport.zoom" value="1.6105100000000043"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM lavoura]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="extensao_ha" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="455" y="0" width="100" height="79" uuid="2d7b2f75-adae-4633-93a9-e5462fa43ac2"/>
+				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\reports\\agro_relatorio.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="18" y="21" width="285" height="37" uuid="0af6bddb-5c77-41f1-81a2-ac2a652f4351"/>
+				<textElement>
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Relatório Lavouras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="455" y="0" width="97" height="20" uuid="3f286c7c-d50e-4a28-b0f4-66edf88ba755"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extensão em ha.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="0" width="156" height="20" uuid="52fe81ad-4cde-48b3-8b47-c3860de6f0a9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="0" width="78" height="20" uuid="689bce32-e702-4043-92d8-f3904c7d9962"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="441" y="1" width="1" height="27" uuid="b1ff355f-5104-4501-86c2-a7a933855735"/>
+			</line>
+			<line>
+				<reportElement x="96" y="1" width="1" height="27" uuid="860cb5db-59b4-4b8b-9665-65c975f41984"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="29" uuid="79012264-287a-4e3e-b1a0-0a4cc84681c5"/>
+			</line>
+			<line>
+				<reportElement x="554" y="1" width="1" height="27" uuid="de9bc3e6-6d71-4e74-8fe1-a6314dc25c3a"/>
+			</line>
+			<textField>
+				<reportElement x="454" y="5" width="100" height="20" uuid="538a5ae6-968c-4d21-a99b-aee5db007585"/>
+				<textFieldExpression><![CDATA[$F{extensao_ha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="5" width="100" height="20" uuid="6bda89c1-25dd-4ea3-9c58-c845c3a731c9"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="5" width="78" height="20" uuid="bf744f29-6a09-4473-a535-b564c045608c"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="28" width="554" height="1" uuid="d26a7f74-0ea5-4c2d-ac91-034049eae83a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="8fae6f87-4ca5-494e-a1a1-0dbbbf0319bf"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="52" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

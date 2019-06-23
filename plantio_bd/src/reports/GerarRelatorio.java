@@ -56,4 +56,24 @@ public class GerarRelatorio {
             System.out.println("Erro: " + ex.getMessage());    
         }
     }
+    
+    public static void gerarLavoura(){
+        try {
+            Connection conn = conexao.Conexao.getConexao();
+            String src = "jasper/lavoura.jasper";
+            JasperPrint jasperPrint = null;
+            try {
+                jasperPrint = JasperFillManager.fillReport(src, null, conn);
+            }
+            catch (JRException ex){
+                System.out.println("Erro: " + ex.getMessage());
+            }
+            
+            JasperViewer view = new JasperViewer(jasperPrint, false);
+            view.setVisible(true);
+        }
+        catch (Exception ex){
+            System.out.println("Erro: " + ex.getMessage());    
+        }
+    }
 }

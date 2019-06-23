@@ -204,7 +204,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSoundMousePressed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
+        reports.GerarRelatorio.gerarLavoura();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

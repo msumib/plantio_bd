@@ -37,14 +37,23 @@
 			</line>
 			<staticText>
 				<reportElement x="16" y="0" width="64" height="20" uuid="98273e20-00d6-460a-8416-622835ba6900"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="109" y="0" width="156" height="20" uuid="b749ac32-8e63-4416-b363-ad1f2cc53b9b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="389" y="0" width="166" height="20" uuid="b4e3f0fc-5945-4bfb-a538-feffc3c0341b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Classe]]></text>
 			</staticText>
 		</band>
