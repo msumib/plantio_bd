@@ -22,7 +22,7 @@ public class ListagemAplicacao extends javax.swing.JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         
-        Color color = Color.decode("#a6badb");        
+        Color color = Color.decode("#add8e6");        
         this.getContentPane().setBackground(color);
     }
 

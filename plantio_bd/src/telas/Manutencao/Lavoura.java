@@ -5,8 +5,11 @@
  */
 package telas.Manutencao;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import telas.Listagem.ListagemLavoura;
+import telas.Listagem.ListagemLavouraDetalhada;
 
 /**
  *
@@ -18,9 +21,41 @@ public class Lavoura extends javax.swing.JDialog {
     static void alterarLavoura(String label, double spinner) {
         dao.LavouraDao.alterar(Lavoura.codigo, label, spinner);         
     }
+    
+    static boolean getNovo(){
+        return Lavoura.novo;
+    }
+    
+    static void adicionarProdutividade(ArrayList<Object[]> lista){
+        System.out.println("entrou nessa funcao");
+        Short safra1 = Short.parseShort(Integer.toString(safra));                
+        int cod_lav = Lavoura.codigo;
+        
+        //dao.ProdutividadeDao.inserir(qtd_sacas, safra1, Lavoura.codigo, cod_planta);      
+        for(Object[] obj : lista){                        
+            int qtd = (Integer) obj[0];
+            short safra = (short) obj[1];                        
+            int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
+            try {
+                dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
+                dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);
+                Lavoura.listagemDetalhada.atualizarTabelaProdutividade();
+                Lavoura.listagemDetalhada.atualizarTabelaPlanta();
+            }
+            catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }                      
+        }
+    }
 
     private static int codigo;
     private ListagemLavoura listagem;
+    private static ListagemLavouraDetalhada listagemDetalhada;    
+    private static int cod_produtividade;
+    private static int qtd_sacas;
+    private static int safra;
+    private static int cod_planta;
+    private static boolean novo = true;
     /**
      * Creates new form Lavoura
      */
@@ -29,6 +64,7 @@ public class Lavoura extends javax.swing.JDialog {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
+        System.out.println(Lavoura.novo);
     }
     
     public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavoura listagem, int codigo, String nome, double area) throws Exception {
@@ -51,6 +87,58 @@ public class Lavoura extends javax.swing.JDialog {
         catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura) throws Exception {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);        
+        
+        this.codigo = codigo_lavoura;
+        this.listagemDetalhada = listagem;
+        this.novo = false;
+        
+        System.out.println(Lavoura.novo);
+        
+        this.jTabbedPane1.setSelectedIndex(1);
+        this.jTabbedPane1.setEnabledAt(0, false);
+        this.jTabbedPane1.setEnabledAt(2, false);
+//        PanelProdutividade pp = (PanelProdutividade) this.jTabbedPane1.getComponentAt(0);
+//        try {
+//            pl.setDisabled();            
+//        }
+//        catch (Exception ex){
+//            JOptionPane.showMessageDialog(null, ex.getMessage());
+//        }
+//        
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, JTable tabela, int codigo_lavoura, int codigo_produtividade, int qtd_sacas, int safra, int cod_planta) throws Exception {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);        
+        
+        this.codigo = codigo_lavoura;
+        this.cod_produtividade = codigo_produtividade;
+        this.qtd_sacas = qtd_sacas;
+        this.safra = safra;
+        this.cod_planta = cod_planta;
+        
+        this.jTabbedPane1.setSelectedIndex(0);
+        this.jTabbedPane1.setEnabledAt(1, false);
+        this.jTabbedPane1.setEnabledAt(2, false);
+        PanelLavoura pl = (PanelLavoura) this.jTabbedPane1.getComponentAt(0);
+//        try {
+//            pl.setDisabled();
+//            pl.setLabel(nome);
+//            pl.setSpinner(area);
+//        }
+//        catch (Exception ex){
+//            JOptionPane.showMessageDialog(null, ex.getMessage());
+//        }
         
     }
     

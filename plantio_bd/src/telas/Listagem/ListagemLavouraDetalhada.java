@@ -5,9 +5,13 @@
  */
 package telas.Listagem;
 
-import java.awt.Color;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import telas.Manutencao.Lavoura;
 
 /**
  *
@@ -22,19 +26,26 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
      * Creates new form ListagemLavouraDetelhada
      */
     public ListagemLavouraDetalhada(int codigo, String nome) {
-        initComponents();
-        setResizable(false);
-        setLocationRelativeTo(null);        
-        this.codigo = codigo;
-        this.nome = nome;
-        
-        Color color = Color.decode("#a6badb");        
-        this.getContentPane().setBackground(color);
-        
-        lblNome.setText("Lavoura " + nome);
-        atualizarTabelaPlanta();
-        atualizarTabelaProdutividade();
-        atualizarTabelaAplicacao();
+        try {
+            initComponents();
+            setResizable(false);
+            setLocationRelativeTo(null);        
+            this.codigo = codigo;
+            this.nome = nome;
+
+            //Color color = Color.decode("#add8e6");        
+            //this.getContentPane().setBackground(color);
+
+            lblNome.setText("Lavoura " + nome);
+            
+            
+            atualizarTabelaPlanta();
+            atualizarTabelaProdutividade();
+            atualizarTabelaAplicacao();
+        }
+        catch (Exception ex){
+            
+        }
     }
 
     private ListagemLavouraDetalhada() {
@@ -61,6 +72,14 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaPlantas = new javax.swing.JTable();
+        lblLogo = new javax.swing.JLabel();
+        tabelaDefDelete = new javax.swing.JLabel();
+        tabelaDefEdit = new javax.swing.JLabel();
+        tabelaDefNew = new javax.swing.JLabel();
+        tabelaProNew = new javax.swing.JLabel();
+        tabelaProEdit = new javax.swing.JLabel();
+        tabelaProDelete = new javax.swing.JLabel();
+        tabelaPlaDelete = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -117,6 +136,42 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabelaPlantas);
 
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/agro202.png"))); // NOI18N
+
+        tabelaDefDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deleteicon(3).png"))); // NOI18N
+        tabelaDefDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaDefDeleteMousePressed(evt);
+            }
+        });
+
+        tabelaDefEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editicon(1).png"))); // NOI18N
+
+        tabelaDefNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plusicon(1).png"))); // NOI18N
+
+        tabelaProNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plusicon(1).png"))); // NOI18N
+        tabelaProNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaProNewMousePressed(evt);
+            }
+        });
+
+        tabelaProEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editicon(1).png"))); // NOI18N
+
+        tabelaProDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deleteicon(3).png"))); // NOI18N
+        tabelaProDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaProDeleteMousePressed(evt);
+            }
+        });
+
+        tabelaPlaDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deleteicon(3).png"))); // NOI18N
+        tabelaPlaDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaPlaDeleteMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,17 +182,37 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
                     .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tabelaProNew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tabelaProEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tabelaProDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(tabelaPlaDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(125, 125, 125)
+                                .addComponent(tabelaDefNew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tabelaDefEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tabelaDefDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 10, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(157, 157, 157)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,22 +220,44 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tabelaProDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 21, Short.MAX_VALUE)
+                                .addComponent(tabelaProEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tabelaProNew, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                            .addComponent(tabelaPlaDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(tabelaDefNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tabelaDefEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tabelaDefDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLogo)
+                        .addGap(14, 14, 14)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tabelaDefEdit, tabelaProDelete, tabelaProEdit, tabelaProNew});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,8 +266,69 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosing
 
+    private void tabelaProDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProDeleteMousePressed
+        if(tabelaProdutividade.getSelectedRow() >= 0){
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Tem certeza?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                int linhaSelecionada = tabelaProdutividade.getSelectedRow();        
+                int codigo = Integer.parseInt(tabelaProdutividade.getValueAt(linhaSelecionada, 0).toString());
+                dao.ProdutividadeDao.deletar(codigo);            
+                atualizarTabelaProdutividade();
+            }
+        }
+    }//GEN-LAST:event_tabelaProDeleteMousePressed
+
+    private void tabelaPlaDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPlaDeleteMousePressed
+        if(tabelaPlantas.getSelectedRow() >= 0){
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Tem certeza?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                int linhaSelecionada = tabelaPlantas.getSelectedRow();        
+                int codigo_planta = Integer.parseInt(tabelaPlantas.getValueAt(linhaSelecionada, 0).toString());
+                String data = tabelaPlantas.getValueAt(linhaSelecionada, 1).toString();
+                try {
+                    dao.LavouraPlantaDao.deletar(this.codigo, codigo_planta, data);
+                    atualizarTabelaPlanta();
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+                }
+                
+            }
+        }
+    }//GEN-LAST:event_tabelaPlaDeleteMousePressed
+
+    private void tabelaDefDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDefDeleteMousePressed
+        if(tabelaAplicacaoDefensivos.getSelectedRow() >= 0){
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Tem certeza?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                int linhaSelecionada = tabelaAplicacaoDefensivos.getSelectedRow();        
+                int codigo_aplicacao = Integer.parseInt(tabelaAplicacaoDefensivos.getValueAt(linhaSelecionada, 0).toString());                
+                try {
+                    dao.AplicacaoDefensivoDao.deletar(codigo_aplicacao);
+                    atualizarTabelaAplicacao();
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+                }
+                
+            }
+        }
+    }//GEN-LAST:event_tabelaDefDeleteMousePressed
+
+    private void tabelaProNewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProNewMousePressed
+        Lavoura lav;
+        try {
+            lav = new Lavoura(null, true, this, this.codigo);
+            lav.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(ListagemLavoura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tabelaProNewMousePressed
+
     public void atualizarTabelaPlanta() {
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel();        
+        modelo.addColumn("Código");        
         modelo.addColumn("Data do Plantio");
         modelo.addColumn("Tipo");
         modelo.addColumn("Cultivar");
@@ -183,20 +341,24 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
     
     public void atualizarTabelaProdutividade() {
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
         modelo.addColumn("Qtd. Sacas");
         modelo.addColumn("Safra");
-        modelo.addColumn("Tipo");
-        modelo.addColumn("Cultivar");
+        modelo.addColumn("Cod. Planta");
+        //modelo.addColumn("Tipo");
+        //modelo.addColumn("Cultivar");
         List<String[]> resultados = dao.ProdutividadeDao.consultar(this.codigo);
         for (String[] linha : resultados) {
             modelo.addRow(linha);
         }
-        tabelaProdutividade.setModel(modelo);
+        tabelaProdutividade.setModel(modelo);        
     }
     
     public void atualizarTabelaAplicacao() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Data da Aplicação");        
+        modelo.addColumn("Código");
+        modelo.addColumn("Data");
+        modelo.addColumn("Cód. Defensivo");                
         modelo.addColumn("Dose");
         modelo.addColumn("Nome");
         modelo.addColumn("Classe");
@@ -250,9 +412,17 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JTable tabelaAplicacaoDefensivos;
+    private javax.swing.JLabel tabelaDefDelete;
+    private javax.swing.JLabel tabelaDefEdit;
+    private javax.swing.JLabel tabelaDefNew;
+    private javax.swing.JLabel tabelaPlaDelete;
     private javax.swing.JTable tabelaPlantas;
+    private javax.swing.JLabel tabelaProDelete;
+    private javax.swing.JLabel tabelaProEdit;
+    private javax.swing.JLabel tabelaProNew;
     private javax.swing.JTable tabelaProdutividade;
     // End of variables declaration//GEN-END:variables
 }
