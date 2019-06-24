@@ -54,6 +54,7 @@ public class Home extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 480));
@@ -150,6 +151,20 @@ public class Home extends javax.swing.JFrame {
 
         jMenu4.setText("Sobre");
         jMenu4.setMargin(new java.awt.Insets(0, 0, 0, 10));
+        jMenu4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenu4KeyPressed(evt);
+            }
+        });
+
+        jMenuItem4.setText("Sobre");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -215,6 +230,17 @@ public class Home extends javax.swing.JFrame {
         reports.GerarRelatorio.gerarPlanta();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenu4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu4KeyPressed
+        
+    }//GEN-LAST:event_jMenu4KeyPressed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        JOptionPane.showMessageDialog(null, "Programa feito por Bolívar, Bruno, Matheus e Pedro!");
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -258,6 +284,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
