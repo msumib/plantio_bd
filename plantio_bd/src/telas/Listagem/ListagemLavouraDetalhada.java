@@ -5,6 +5,7 @@
  */
 package telas.Listagem;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +27,9 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
         setLocationRelativeTo(null);        
         this.codigo = codigo;
         this.nome = nome;
+        
+        Color color = Color.decode("#a6badb");        
+        this.getContentPane().setBackground(color);
         
         lblNome.setText("Lavoura " + nome);
         atualizarTabelaPlanta();

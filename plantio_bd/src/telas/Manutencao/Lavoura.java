@@ -5,6 +5,7 @@
  */
 package telas.Manutencao;
 
+import javax.swing.JOptionPane;
 import telas.Listagem.ListagemLavoura;
 
 /**
@@ -13,6 +14,12 @@ import telas.Listagem.ListagemLavoura;
  */
 public class Lavoura extends javax.swing.JDialog {
 
+    
+    static void alterarLavoura(String label, double spinner) {
+        dao.LavouraDao.alterar(Lavoura.codigo, label, spinner);         
+    }
+
+    private static int codigo;
     private ListagemLavoura listagem;
     /**
      * Creates new form Lavoura
@@ -24,18 +31,29 @@ public class Lavoura extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
     
-    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavoura listagem, int codigo, String nome, double area) {
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavoura listagem, int codigo, String nome, double area) throws Exception {
         super(parent, modal);
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         
         this.listagem = listagem;
+        this.codigo = codigo;
         this.jTabbedPane1.setSelectedIndex(0);
         this.jTabbedPane1.setEnabledAt(1, false);
         this.jTabbedPane1.setEnabledAt(2, false);
+        PanelLavoura pl = (PanelLavoura) this.jTabbedPane1.getComponentAt(0);
+        try {
+            pl.setDisabled();
+            pl.setLabel(nome);
+            pl.setSpinner(area);
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +67,11 @@ public class Lavoura extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         setTitle("Info Lavoura");
         jTabbedPane1.add("Lavoura", new PanelLavoura(jTabbedPane1));
@@ -73,6 +96,10 @@ public class Lavoura extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+                       
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

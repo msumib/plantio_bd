@@ -76,7 +76,7 @@ public class LavouraDao
 
     public static List<String[]> consultar() {
         List<String[]> resultados = new ArrayList<>();
-        String sql = "SELECT codigo, nome, extensao_ha FROM lavoura";
+        String sql = "SELECT codigo, nome, extensao_ha FROM lavoura ORDER BY codigo";
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);

@@ -66,7 +66,7 @@ public class DefensivoDao {
 
     public static List<String[]> consultar() {
         List<String[]> resultados = new ArrayList<>();
-        String sql = "SELECT codigo, nome, classe FROM defensivo";
+        String sql = "SELECT codigo, nome, classe FROM defensivo ORDER BY codigo";
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
