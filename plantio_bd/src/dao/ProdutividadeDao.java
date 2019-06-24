@@ -6,7 +6,10 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,6 +31,36 @@ public class ProdutividadeDao {
         catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             return false;
+        }
+    }
+    
+    public static List<String[]> consultar(int codigo_lavoura){
+        List<String[]> resultados = new ArrayList<>();
+        String sql;
+        sql = "SELECT pr.qtd_sacas, pr.safra, p.tipo, p.cultivar\n" +
+        "	FROM produtividade pr JOIN planta p ON\n" +
+        "	pr.codigo_planta = p.codigo\n" +
+        "	WHERE pr.codigo_lavoura = ?";
+        try {            
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);                       
+            ps.setInt(1, codigo_lavoura);                
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String[] linha = new String[4];
+                int qtd_sacas = rs.getInt("qtd_sacas");
+                Short safra = rs.getShort("safra");
+                linha[0] = Integer.toString(qtd_sacas);
+                linha[1] = Short.toString(safra);
+                linha[2] = rs.getString("tipo");
+                linha[3] = rs.getString("cultivar");
+                resultados.add(linha);
+            }
+            return resultados;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("nao deu piazada deu erro aqui");
+            System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
+            return null;
         }
     }
 }

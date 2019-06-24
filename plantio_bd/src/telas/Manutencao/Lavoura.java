@@ -5,12 +5,15 @@
  */
 package telas.Manutencao;
 
+import telas.Listagem.ListagemLavoura;
+
 /**
  *
  * @author itzfeltrin
  */
 public class Lavoura extends javax.swing.JDialog {
 
+    private ListagemLavoura listagem;
     /**
      * Creates new form Lavoura
      */
@@ -19,6 +22,19 @@ public class Lavoura extends javax.swing.JDialog {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavoura listagem, int codigo, String nome, double area) {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+        this.listagem = listagem;
+        this.jTabbedPane1.setSelectedIndex(0);
+        this.jTabbedPane1.setEnabledAt(1, false);
+        this.jTabbedPane1.setEnabledAt(2, false);
+        
     }
 
     /**

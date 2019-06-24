@@ -155,6 +155,24 @@ public class PanelLavoura extends javax.swing.JPanel {
         lav.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    public void setLabel(String label) throws Exception{
+        if(label.length() > 0){
+           lblNomeLavoura.setText(label);
+        }
+        else {
+            throw new Exception("Nome muito pequeno!");
+        }
+    }
+    
+    public void setSpinner(double value) throws Exception{
+        if(value > 0){
+            spinnerExtensaoLavoura.setValue(value);
+        }
+        else {
+            throw new Exception("Valor errado!");
+        }
+    }
+    
     public String getLabel() throws Exception{
         if(lblNomeLavoura.getText().length() > 0){            
             return lblNomeLavoura.getText();            

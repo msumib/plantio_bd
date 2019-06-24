@@ -6,6 +6,10 @@
 package telas.Listagem;
 
 import java.awt.Color;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import telas.Manutencao.Lavoura;
 
 /**
  *
@@ -24,6 +28,8 @@ public class ListagemLavoura extends javax.swing.JDialog {
         
         Color color = Color.decode("#a6badb");        
         this.getContentPane().setBackground(color);
+        
+        atualizarTabela();
     }
 
     /**
@@ -37,7 +43,7 @@ public class ListagemLavoura extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -48,7 +54,7 @@ public class ListagemLavoura extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Listagem de Lavouras");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -59,7 +65,12 @@ public class ListagemLavoura extends javax.swing.JDialog {
                 "Código", "Nome", "Extensão (ha.)"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabela);
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,17 +132,60 @@ public class ListagemLavoura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+                                     
+        if(tabela.getSelectedRow() >= 0){
+            Object[] options = {"Não", "Sim"};
+            int opcao = JOptionPane.showOptionDialog(null, "Tem certeza?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(opcao == 1){
+                int linhaSelecionada = tabela.getSelectedRow();        
+                int codigo = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString());
+                dao.LavouraDao.deletar(codigo);            
+                atualizarTabela();
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if(tabela.getSelectedRow() >= 0){
+            int linhaSelecionada = tabela.getSelectedRow();
+        
+            int codigo = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString());
+            String nome = tabela.getValueAt(linhaSelecionada, 1).toString(); //pk está na coluna 0
+            Double area = Double.parseDouble(tabela.getValueAt(linhaSelecionada, 2).toString());
+            Lavoura def = new Lavoura(null, true, this, codigo, nome, area);
+            def.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void tabelaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMousePressed
+        if (evt.getClickCount() == 2) {
+            //obtem a linha selecionada
+            int linhaSelecionada = tabela.getSelectedRow();
+
+            //obtem a chave primária
+            int codigo = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString());
+            String nome = tabela.getValueAt(linhaSelecionada, 1).toString(); //pk está na coluna 0            
+            ListagemLavouraDetalhada pla = new ListagemLavouraDetalhada(codigo, nome);            
+            pla.setVisible(true);
+        }
+    }//GEN-LAST:event_tabelaMousePressed
+
+    public void atualizarTabela() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Extensão (ha.)");
+        List<String[]> resultados = dao.LavouraDao.consultar();
+        for (String[] linha : resultados) {
+            modelo.addRow(linha);
+        }
+        tabela.setModel(modelo);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -183,6 +237,6 @@ public class ListagemLavoura extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }
