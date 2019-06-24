@@ -23,7 +23,7 @@
 			</staticText>
 			<image>
 				<reportElement x="455" y="0" width="100" height="79" uuid="2182e26a-d538-4912-a49e-4639bd9b60fc"/>
-				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\reports\\agro_relatorio.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/umib/NetBeansProjects/plantio_bd_3/plantio_bd/src/reports/agro_relatorio.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

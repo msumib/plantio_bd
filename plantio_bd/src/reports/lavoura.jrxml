@@ -16,7 +16,7 @@
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="455" y="0" width="100" height="79" uuid="2d7b2f75-adae-4633-93a9-e5462fa43ac2"/>
-				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\reports\\agro_relatorio.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/umib/NetBeansProjects/plantio_bd_3/plantio_bd/src/reports/agro_relatorio.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="18" y="21" width="285" height="37" uuid="0af6bddb-5c77-41f1-81a2-ac2a652f4351"/>
