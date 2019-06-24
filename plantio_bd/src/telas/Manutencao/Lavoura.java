@@ -47,13 +47,28 @@ public class Lavoura extends javax.swing.JDialog {
             }                      
         }
     }
+    
+    static void alterarProdutividade(int qtd, Short ano, int codigo_planta, String data){
+        System.out.println("entrou no alterar");
+        int cod_lav = Lavoura.codigo;
+        int cod_produtividade = Lavoura.cod_produtividade;            
+        try {
+            dao.LavouraPlantaDao.inserir(data, cod_lav, codigo_planta);
+            dao.ProdutividadeDao.alterar(qtd, safra, cod_produtividade, codigo_planta);
+            Lavoura.listagemDetalhada.atualizarTabelaProdutividade();
+            Lavoura.listagemDetalhada.atualizarTabelaPlanta();            
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
 
     private static int codigo;
     private ListagemLavoura listagem;
     private static ListagemLavouraDetalhada listagemDetalhada;    
     private static int cod_produtividade;
     private static int qtd_sacas;
-    private static int safra;
+    private static short safra;
     private static int cod_planta;
     private static boolean novo = true;
     /**
@@ -115,34 +130,36 @@ public class Lavoura extends javax.swing.JDialog {
 //        
     }
     
-    public Lavoura(java.awt.Frame parent, boolean modal, JTable tabela, int codigo_lavoura, int codigo_produtividade, int qtd_sacas, int safra, int cod_planta) throws Exception {
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura, int codigo_produtividade, int qtd_sacas, short safra, int cod_planta) throws Exception {
         super(parent, modal);
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);        
+                
+        this.novo = false;
         
+        this.listagemDetalhada = listagem;
         this.codigo = codigo_lavoura;
         this.cod_produtividade = codigo_produtividade;
         this.qtd_sacas = qtd_sacas;
         this.safra = safra;
         this.cod_planta = cod_planta;
-        
-        this.jTabbedPane1.setSelectedIndex(0);
-        this.jTabbedPane1.setEnabledAt(1, false);
+        String tipo = dao.PlantaDao.select(this.cod_planta)[0];
+        String cultivar = dao.PlantaDao.select(this.cod_planta)[1];        
+        this.jTabbedPane1.setSelectedIndex(1);
+        this.jTabbedPane1.setEnabledAt(0, false);
         this.jTabbedPane1.setEnabledAt(2, false);
-        PanelLavoura pl = (PanelLavoura) this.jTabbedPane1.getComponentAt(0);
-//        try {
-//            pl.setDisabled();
-//            pl.setLabel(nome);
-//            pl.setSpinner(area);
-//        }
-//        catch (Exception ex){
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
-        
+        PanelProdutividade pp = (PanelProdutividade) this.jTabbedPane1.getComponentAt(1);
+        try {                        
+            pp.setPlanta(tipo);
+            pp.setCultivar(cultivar);            
+            pp.setQtd(this.qtd_sacas);
+            pp.setSafra(this.safra);
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

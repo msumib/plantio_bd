@@ -157,6 +157,11 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
         });
 
         tabelaProEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editicon(1).png"))); // NOI18N
+        tabelaProEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaProEditMousePressed(evt);
+            }
+        });
 
         tabelaProDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deleteicon(3).png"))); // NOI18N
         tabelaProDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -325,6 +330,22 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
             Logger.getLogger(ListagemLavoura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabelaProNewMousePressed
+
+    private void tabelaProEditMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProEditMousePressed
+        if(tabelaProdutividade.getSelectedRow() >= 0){            
+            int linhaSelecionada = tabelaProdutividade.getSelectedRow();        
+            int codigo_produtividade = Integer.parseInt(tabelaProdutividade.getValueAt(linhaSelecionada, 0).toString());
+            int qtd_sacas = Integer.parseInt(tabelaProdutividade.getValueAt(linhaSelecionada, 1).toString());
+            Short safra = Short.parseShort(tabelaProdutividade.getValueAt(linhaSelecionada, 2).toString());
+            int cod_planta = Integer.parseInt(tabelaProdutividade.getValueAt(linhaSelecionada, 3).toString());            
+            try {
+                Lavoura lav = new Lavoura(null, true, this, this.codigo, codigo_produtividade, qtd_sacas, safra, cod_planta);
+                lav.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(ListagemLavoura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tabelaProEditMousePressed
 
     public void atualizarTabelaPlanta() {
         DefaultTableModel modelo = new DefaultTableModel();        

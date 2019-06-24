@@ -265,6 +265,9 @@
           <Image iconType="3" name="/images/editicon(1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaProEditMousePressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="tabelaProDelete">
       <Properties>

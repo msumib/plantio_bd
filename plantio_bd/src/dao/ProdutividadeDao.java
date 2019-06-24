@@ -69,6 +69,22 @@ public class ProdutividadeDao {
         }
     }
     
+    public static boolean alterar(int qtd, Short safra, int cod_prod, int cod_pla) {
+        String sql = "UPDATE produtividade SET qtd_sacas = ?, safra = ?, codigo_planta = ? WHERE codigo = ?";
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, qtd);
+            ps.setShort(2, safra);
+            ps.setInt(3, cod_pla);
+            ps.setInt(4, cod_prod);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }        
+    }
+    
     public static boolean deletar(int codigo){
         String sql = "DELETE FROM  produtividade WHERE codigo = ?";
         try {

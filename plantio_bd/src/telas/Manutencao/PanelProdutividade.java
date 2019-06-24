@@ -61,6 +61,7 @@ public class PanelProdutividade extends javax.swing.JPanel {
         btnOutro = new javax.swing.JButton();
         lblData = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        btnAlterar = new javax.swing.JButton();
 
         btnAvancar.setText("Avançar");
         btnAvancar.setPreferredSize(new java.awt.Dimension(100, 40));
@@ -126,6 +127,14 @@ public class PanelProdutividade extends javax.swing.JPanel {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Data de Plantio (dd/MM/yyyy):");
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,6 +167,8 @@ public class PanelProdutividade extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -190,7 +201,8 @@ public class PanelProdutividade extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -269,9 +281,34 @@ public class PanelProdutividade extends javax.swing.JPanel {
         } 
     }//GEN-LAST:event_btnOutroActionPerformed
 
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        try {
+            Integer qtd = getQtd();
+            Short ano = Short.parseShort(Integer.toString(getSafra()));
+            String planta = getPlanta();
+            String cultivar = getCultivar();          
+            String data = getDataProd().toString();
+            
+            Lavoura.alterarProdutividade(qtd, ano, dao.PlantaDao.getCodigo(planta, cultivar), data);
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
     public Integer getQtd() throws Exception{
         if(Integer.parseInt(spinnerQtd.getValue().toString()) > 0){            
             return Integer.parseInt(spinnerQtd.getValue().toString());
+        }
+        else {            
+            throw new Exception("Quantidade deve ser maior que 0!");
+        }
+    }
+    
+    public void setQtd(int qtd) throws Exception{
+        if(qtd > 0){            
+            spinnerQtd.setValue(qtd);
         }
         else {            
             throw new Exception("Quantidade deve ser maior que 0!");
@@ -287,12 +324,30 @@ public class PanelProdutividade extends javax.swing.JPanel {
         }
     }
     
+    public void setSafra(int qtd) throws Exception{
+        if(qtd > 0){            
+            spinnerAno.setValue(qtd);
+        }
+        else {            
+            throw new Exception("Safra inválida!");
+        }
+    }
+    
     public String getPlanta() throws Exception{
         if(comboboxPlanta.getSelectedIndex() > 0){
             return comboboxPlanta.getSelectedItem().toString();
         }
         else {
             throw new Exception("Planta inválida.");
+        }
+    }
+    
+    public void setPlanta(String nome) throws Exception{
+        try {
+            comboboxPlanta.setSelectedItem(nome);
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -305,6 +360,15 @@ public class PanelProdutividade extends javax.swing.JPanel {
         }
     }
     
+    public void setCultivar(String cultivar) throws Exception{
+        try {
+            comboboxCultivar.setSelectedItem(cultivar);
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public LocalDate getDataProd() throws Exception {
         if (lblData.getText().length() > 0) {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -312,6 +376,17 @@ public class PanelProdutividade extends javax.swing.JPanel {
             return ld;
         } else {
             throw new Exception("Data inválida");
+        }
+    }
+    
+    public void setDate(){
+        try {
+            jLabel11.setVisible(false);
+            lblData.setVisible(false);
+            //lblData.setText(data);
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -329,6 +404,7 @@ public class PanelProdutividade extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAvancar;
     private javax.swing.JButton btnOutro;
     private javax.swing.JComboBox<String> comboboxCultivar;

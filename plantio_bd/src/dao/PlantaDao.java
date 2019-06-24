@@ -101,6 +101,26 @@ public class PlantaDao {
         }
     }
     
+    public static String[] select(int codigo) {
+        String sql = "SELECT tipo, cultivar FROM planta WHERE codigo = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            String[] linha = new String[2];
+            while (rs.next()) {                
+                linha[0] = rs.getString("tipo");
+                linha[1] = rs.getString("cultivar");              
+            }
+            return linha;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public static List<String> consultarCultivar(String tipo) {
         ArrayList<String> lista = new ArrayList<>();
         String sql = "SELECT cultivar FROM planta WHERE tipo = ?";
