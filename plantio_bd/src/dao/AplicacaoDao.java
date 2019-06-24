@@ -22,18 +22,15 @@ public class AplicacaoDao {
 
         String sql = "INSERT INTO aplicacao (data_aplicacao, codigo_lavoura) VALUES (?, ?)";
         try {            
-            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
-            System.out.println("chegou até aqui na data do aplicacaoDao");
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);                        
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");            
             Date date = format.parse(data);
             ps.setDate(1, new java.sql.Date(date.getTime()));
             ps.setInt(2, codigo_lavoura);                         
             ps.executeUpdate();
-            System.out.println("fez tudo isso aqui!!!");
             return true;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
             System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
             return false;
         }
@@ -43,8 +40,7 @@ public class AplicacaoDao {
 
         String sql = "SELECT codigo FROM aplicacao WHERE data_aplicacao = ? AND codigo_lavoura = ?";
         try {            
-            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
-            System.out.println("chegou até aqui na data do aplicacaoDao");
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");            
             Date date = format.parse(data);
             ps.setDate(1, new java.sql.Date(date.getTime()));
@@ -57,9 +53,24 @@ public class AplicacaoDao {
             return codigo;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
             System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
             return 0;
         }
-    }     
+    } 
+
+    public static boolean alterar(int codigo, String data_aplicacao) throws ParseException {    
+        String sql = "UPDATE aplicacao SET data_aplicacao = ? WHERE codigo = ?";
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");            
+            Date date = format.parse(data_aplicacao);
+            ps.setInt(1, codigo);            
+            ps.setDate(2, new java.sql.Date(date.getTime()));
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
 }

@@ -63,7 +63,6 @@ public class ProdutividadeDao {
             return resultados;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
             System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
             return null;
         }

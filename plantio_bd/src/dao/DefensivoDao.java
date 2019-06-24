@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -147,11 +148,30 @@ public class DefensivoDao {
         }
     }
     
+    public static String[] select(int codigo) {
+        String sql = "SELECT nome, classe FROM defensivo WHERE codigo = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            String[] linha = new String[2];
+            while (rs.next()) {                
+                linha[0] = rs.getString("nome");
+                linha[1] = rs.getString("classe");              
+            }
+            return linha;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PlantaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public static int getCodigo(String nome, String classe) {
         String sql = "SELECT codigo FROM defensivo WHERE nome = ? AND classe = ?";
         try {            
-            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
-            System.out.println("chegou até aqui na data do aplicacaoDao");            
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);           
             ps.setString(1, nome);
             ps.setString(2, classe);                         
             ResultSet rs = ps.executeQuery();
@@ -162,7 +182,6 @@ public class DefensivoDao {
             return codigo;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
             System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
             return 0;
         }
@@ -198,7 +217,7 @@ public class DefensivoDao {
             return true;
         }
         catch (SQLException | ClassNotFoundException ex){
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Não pode ser deletado");
             return false;
         }
     }

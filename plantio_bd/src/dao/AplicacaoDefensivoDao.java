@@ -25,18 +25,15 @@ public class AplicacaoDefensivoDao {
 
         String sql = "INSERT INTO aplicacao_defensivo (dose, codigo_aplicacao, codigo_defensivo) VALUES (?, ?, ?)";
         try {            
-            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
-            System.out.println("chegou até aqui na data do aplicacaoDao");            
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);           
             ps.setDouble(1, dose);
             ps.setInt(2, codigo_aplicacao);
             ps.setInt(3, codigo_defensivo);
             ps.executeUpdate();
-            System.out.println("fez tudo isso aqui!!!");
             return true;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
-            System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
+            System.out.println("Erro em aplicacaodefensivodao: " + ex.getMessage());
             return false;
         }
     }  
@@ -48,7 +45,7 @@ public class AplicacaoDefensivoDao {
         "    FROM aplicacao_defensivo ad\n" +
         "	JOIN aplicacao ap ON  ap.codigo = ad.codigo_aplicacao\n" +
         "	JOIN defensivo d ON d.codigo = ad.codigo_defensivo\n" +
-        "	WHERE ap.codigo_lavoura = ? ORDER BY ap.data_aplicacao";
+        "	WHERE ap.codigo_lavoura = ? ORDER BY ap.codigo";
         try {            
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);                       
             ps.setInt(1, codigo_lavoura);                
@@ -69,7 +66,6 @@ public class AplicacaoDefensivoDao {
             return resultados;
         } 
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("nao deu piazada deu erro aqui");
             System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
             return null;
         }
@@ -80,6 +76,22 @@ public class AplicacaoDefensivoDao {
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
             ps.setInt(1, codigo_aplicacao);
+            ps.executeUpdate();
+            return true;
+        }
+        catch (SQLException | ClassNotFoundException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public static boolean alterar(Double dose, int codigo_aplicacao, int codigo_defensivo){
+        String sql = "UPDATE aplicacao_defensivo SET dose = ? WHERE codigo_aplicacao = ? AND codigo_defensivo = ?";
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
+            ps.setDouble(1, dose);
+            ps.setInt(2, codigo_aplicacao);
+            ps.setInt(3, codigo_defensivo);
             ps.executeUpdate();
             return true;
         }

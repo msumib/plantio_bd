@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -194,7 +195,7 @@ public class PlantaDao {
             return true;
         }
         catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Não pode ser deletada");
             return false;
         } 
     }

@@ -241,6 +241,9 @@
           <Image iconType="3" name="/images/editicon(1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaDefEditMousePressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="tabelaDefNew">
       <Properties>
@@ -248,6 +251,9 @@
           <Image iconType="3" name="/images/plusicon(1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaDefNewMousePressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="tabelaProNew">
       <Properties>

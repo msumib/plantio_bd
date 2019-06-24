@@ -194,7 +194,11 @@ public class PanelLavoura extends javax.swing.JPanel {
         }
     }
     
-    public void setDisabled(){
+    public void setDisabled1(){
+        btnAlterar.setEnabled(false);        
+    }
+    
+    public void setDisabled2(){
         btnAvancar.setEnabled(false);        
     }
 

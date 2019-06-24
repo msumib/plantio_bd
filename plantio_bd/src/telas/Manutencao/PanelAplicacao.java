@@ -10,6 +10,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -28,7 +30,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
     public PanelAplicacao(javax.swing.JTabbedPane mainTabbedPane) {
         initComponents();
         this.mainTabbedPane = mainTabbedPane;
-
+        
         comboboxNome.removeAllItems();
         comboboxNome.setEnabled(false);
 
@@ -39,6 +41,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         for (String linha : resultados) {
             comboboxClasse.addItem(linha);
         }
+        
 
 //        comboboxLavoura.removeAllItems();
 //        comboboxLavoura.addItem("-");
@@ -88,6 +91,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jButton9 = new javax.swing.JButton();
         spinnerDose = new javax.swing.JSpinner();
+        btnAlterar = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -205,6 +209,14 @@ public class PanelAplicacao extends javax.swing.JPanel {
 
         spinnerDose.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,7 +252,9 @@ public class PanelAplicacao extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -279,7 +293,8 @@ public class PanelAplicacao extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOutro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -320,70 +335,75 @@ public class PanelAplicacao extends javax.swing.JPanel {
     }//GEN-LAST:event_comboboxClasseActionPerformed
 
     private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
+        
         try {
             LocalDate data = getData();
             String classe = getClasse();
             String nome = getNome();
             //String lavoura = getLavoura();
             Double dose = getDose();
-            System.out.println("aqui no get dose do add primo: " + dose);
             Object[] array = {data, classe, nome, dose};
             this.lista.add(array);            
-            
-            Object[] options = {"Não", "Sim"};
-            int opcao = JOptionPane.showOptionDialog(null, "Adicionar Lavoura?", "Mensagem", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-            if(opcao == 1){
-                PanelLavoura pl = (PanelLavoura) this.mainTabbedPane.getComponentAt(0);
-                PanelProdutividade pd = (PanelProdutividade) this.mainTabbedPane.getComponent(1);
-                try {                    
-                    String nomeLavoura = pl.getLabel();
-                    Double extensaoLavoura = pl.getSpinner();  
-                    dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
-                    JOptionPane.showMessageDialog(null, "Lavoura adicionada!");
-                    this.getTopLevelAncestor().setVisible(false);
-                }
-                catch (Exception ex){
-                    JOptionPane.showMessageDialog(null, "Conteúdo faltando!");
-                    this.mainTabbedPane.setSelectedIndex(0);
-                }
-                try {                    
-                    ArrayList<Object[]> lista = pd.getLista();
-                    int cod_lav = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());    
-                    for(Object[] obj : lista){                        
-                        int qtd = (Integer) obj[0];
-                        short safra = (short) obj[1];                        
-                        int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
-                        try {
-                            dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
-                            dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
-                            this.getTopLevelAncestor().setVisible(false);
+
+            if(Lavoura.getNovo() == true){
+                Object[] options = {"Não", "Sim"};
+                int opcao = JOptionPane.showOptionDialog(null, "Adicionar Lavoura?", "Mensagem", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                if(opcao == 1){
+                    PanelLavoura pl = (PanelLavoura) this.mainTabbedPane.getComponentAt(0);
+                    PanelProdutividade pd = (PanelProdutividade) this.mainTabbedPane.getComponent(1);
+                    try {                    
+                        String nomeLavoura = pl.getLabel();
+                        Double extensaoLavoura = pl.getSpinner();  
+                        dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
+                        JOptionPane.showMessageDialog(null, "Lavoura adicionada!");
+                        this.getTopLevelAncestor().setVisible(false);
+                    }
+                    catch (Exception ex){
+                        JOptionPane.showMessageDialog(null, "Conteúdo faltando!");
+                        this.mainTabbedPane.setSelectedIndex(0);
+                    }
+                    try {                    
+                        ArrayList<Object[]> lista = pd.getLista();
+                        int cod_lav = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());    
+                        for(Object[] obj : lista){                        
+                            int qtd = (Integer) obj[0];
+                            short safra = (short) obj[1];                        
+                            int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
+                            try {
+                                dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
+                                dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
+                                this.getTopLevelAncestor().setVisible(false);
+                            }
+                            catch (Exception ex){
+                                JOptionPane.showMessageDialog(null, ex.getMessage());
+                            }                      
                         }
-                        catch (Exception ex){
-                            JOptionPane.showMessageDialog(null, ex.getMessage());
-                        }                      
                     }
-                }
-                catch (NullPointerException ex){
-                    System.out.println("Deu erro nullpointer: " + ex.getMessage());
-                }
-                try {
-                    for(Object[] obj : this.lista){
-                        String dataAplicacao = obj[0].toString();
-                        int codigo_lavoura = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());
-                        System.out.println("chegou aqui na parte de inserir aplicacao");
-                        dao.AplicacaoDao.inserir(dataAplicacao, codigo_lavoura);
-                        Double doseAplicacaoDefensivo = (Double) obj[3];
-                        int cod_aplicacao = dao.AplicacaoDao.getCodigo(dataAplicacao, codigo_lavoura);
-                        int cod_defensivo = dao.DefensivoDao.getCodigo(obj[2].toString(), obj[1].toString());
-                        dao.AplicacaoDefensivoDao.inserir(doseAplicacaoDefensivo, cod_aplicacao, cod_defensivo);
+                    catch (NullPointerException ex){
+                        System.out.println("Deu erro nullpointer: " + ex.getMessage());
                     }
-                    
-                }
-                catch (Exception ex){
-                    System.out.println("erro por aqui meu irmao: " + ex.getMessage());
+                    try {
+                        Lavoura lv = (Lavoura) this.getTopLevelAncestor();
+                        for(Object[] obj : this.lista){
+                            String dataAplicacao = obj[0].toString();
+                            int codigo_lavoura = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());
+                            dao.AplicacaoDao.inserir(dataAplicacao, codigo_lavoura);
+                            Double doseAplicacaoDefensivo = (Double) obj[3];
+                            int cod_aplicacao = dao.AplicacaoDao.getCodigo(dataAplicacao, codigo_lavoura);
+                            int cod_defensivo = dao.DefensivoDao.getCodigo(obj[2].toString(), obj[1].toString());
+                            dao.AplicacaoDefensivoDao.inserir(doseAplicacaoDefensivo, cod_aplicacao, cod_defensivo);
+                        }
+                    }
+                    catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                        return;
+                    }
                 }
             }
-        
+            else {
+                Lavoura.adicionarAplicacao(this.lista); 
+            }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             Object[] options = {"Não", "Sim"};
@@ -398,32 +418,25 @@ public class PanelAplicacao extends javax.swing.JPanel {
                         dao.LavouraDao.inserir(nomeLavoura, extensaoLavoura);
                         JOptionPane.showMessageDialog(null, "Lavoura adicionada!");
                         this.getTopLevelAncestor().setVisible(false);
-                        System.out.println("adicionou a lavoura");
                     }
                     catch(Exception ex2){
                         JOptionPane.showMessageDialog(null, ex2.getMessage());
-                        System.out.println("deu erro aqui");
                     }
                     try {                    
-                        System.out.println("entrou aqui");
                         ArrayList<Object[]> lista = pd.getLista();
                         int cod_lav = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());    
                         for(Object[] obj : lista){                        
                             int qtd = (Integer) obj[0];
                             short safra = (short) obj[1];
-                            System.out.println("chegou ate aqui primo");
                             int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
                             try {
-                                System.out.println("aqui foi");
                                 System.out.println(obj[4].toString());
-                                
+
                                 dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
-                                dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
-                                System.out.println("produtividade foi");                                
+                                dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                               
                                 this.getTopLevelAncestor().setVisible(false);
                             }
                             catch (Exception ex2){
-                                System.out.println("aqui nao foi");
                                 JOptionPane.showMessageDialog(null, ex2.getMessage());
                             }                        
                         }
@@ -436,13 +449,12 @@ public class PanelAplicacao extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Conteúdo faltando!");
                     this.mainTabbedPane.setSelectedIndex(0);
                 }
-                
+
             }
             else {
-                JOptionPane.showConfirmDialog(null, "Lavoura não foi adicionada.");
+                JOptionPane.showMessageDialog(null, "Lavoura não foi adicionada.");
             }
-        }
-
+        }        
     }//GEN-LAST:event_btnAvancarActionPerformed
     
     private void btnOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutroActionPerformed
@@ -452,7 +464,6 @@ public class PanelAplicacao extends javax.swing.JPanel {
             String nome = getNome();
             //String lavoura = getLavoura();
             Double dose = getDose();
-            System.out.println("aqui no get dose primo: " + dose);
             Object[] array = {data, classe, nome, dose};
             this.lista.add(array);
             
@@ -466,11 +477,27 @@ public class PanelAplicacao extends javax.swing.JPanel {
         this.getTopLevelAncestor().setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        try {
+            Lavoura.alterarAplicacao(getDose(), getData().toString(), getNome(), getClasse());
+        } catch (Exception ex) {
+            System.out.println("Erro no PanelAplicacao: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
     public LocalDate getData() throws Exception {
         if (lblData.getText().length() > 0) {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate ld = LocalDate.parse(lblData.getText(), df);
             return ld;
+        } else {
+            throw new Exception("Aplicacao - Data inválida");
+        }
+    }
+    
+    public void setData(String data) throws Exception {
+        if (data.length() > 0) {
+            lblData.setText(data);
         } else {
             throw new Exception("Aplicacao - Data inválida");
         }
@@ -484,9 +511,25 @@ public class PanelAplicacao extends javax.swing.JPanel {
         }
     }
 
+    public void setClasse(String classe) throws Exception {
+        if (classe.length() > 0) {
+            comboboxClasse.setSelectedItem(classe);
+        } else {
+            throw new Exception("Classe inválida.");
+        }
+    }
+
     public String getNome() throws Exception {
         if (comboboxNome.getSelectedIndex() > 0) {
             return comboboxNome.getSelectedItem().toString();
+        } else {
+            throw new Exception("Defensivo inválido.");
+        }
+    }
+    
+    public void setNome(String nome) throws Exception {
+        if (nome.length() > 0) {
+            comboboxNome.setSelectedItem(nome);
         } else {
             throw new Exception("Defensivo inválido.");
         }
@@ -508,6 +551,14 @@ public class PanelAplicacao extends javax.swing.JPanel {
         }
     }
 
+    public void setDose(Double dose) throws Exception {
+        if (dose > 0) {
+            spinnerDose.setValue(dose);
+        } else {
+            throw new Exception("Dose inválida.");
+        }
+    }
+
     public void clearScreen() {
         lblData.setText("");
         comboboxClasse.setSelectedIndex(0);
@@ -516,8 +567,19 @@ public class PanelAplicacao extends javax.swing.JPanel {
         spinnerDose.setValue(0);
 
     }
+    
+    public void setDisabled1(){
+        btnAlterar.setEnabled(false);
+    }
+    
+    public void setDisabled2(){
+        btnAlterar.setEnabled(true);
+        btnAvancar.setEnabled(false);
+        btnOutro.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAvancar;
     private javax.swing.JButton btnOutro;
     private javax.swing.JComboBox<String> comboboxClasse;

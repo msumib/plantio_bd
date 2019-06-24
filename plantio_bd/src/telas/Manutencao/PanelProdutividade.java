@@ -402,6 +402,15 @@ public class PanelProdutividade extends javax.swing.JPanel {
         comboboxCultivar.setSelectedIndex(0);
         comboboxPlanta.setSelectedIndex(0);
     }
+    
+    public void setDisabled1(){
+        btnAlterar.setEnabled(false);
+    }
+    
+    public void setDisabled2(){
+        btnOutro.setEnabled(false);
+        btnAvancar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

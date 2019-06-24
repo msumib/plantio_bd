@@ -146,8 +146,18 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
         });
 
         tabelaDefEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editicon(1).png"))); // NOI18N
+        tabelaDefEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaDefEditMousePressed(evt);
+            }
+        });
 
         tabelaDefNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plusicon(1).png"))); // NOI18N
+        tabelaDefNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaDefNewMousePressed(evt);
+            }
+        });
 
         tabelaProNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plusicon(1).png"))); // NOI18N
         tabelaProNew.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -346,6 +356,31 @@ public class ListagemLavouraDetalhada extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tabelaProEditMousePressed
+
+    private void tabelaDefNewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDefNewMousePressed
+        try {
+            Lavoura lav = new Lavoura(null, true, this, this.codigo, 'a');
+            lav.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(ListagemLavoura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tabelaDefNewMousePressed
+
+    private void tabelaDefEditMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDefEditMousePressed
+        if(tabelaAplicacaoDefensivos.getSelectedRow() >= 0){
+            int linhaSelecionada = tabelaAplicacaoDefensivos.getSelectedRow();
+            int codigo_aplicacao = Integer.parseInt(tabelaAplicacaoDefensivos.getValueAt(linhaSelecionada, 0).toString());
+            String date = tabelaAplicacaoDefensivos.getValueAt(linhaSelecionada, 1).toString();
+            int codigo_defensivo = Integer.parseInt(tabelaAplicacaoDefensivos.getValueAt(linhaSelecionada, 2).toString());
+            Double dose = Double.parseDouble(tabelaAplicacaoDefensivos.getValueAt(linhaSelecionada, 3).toString());
+            try {
+                Lavoura lav = new Lavoura(null, true, this, this.codigo, codigo_aplicacao, date, codigo_defensivo, dose);
+                lav.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(ListagemLavoura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tabelaDefEditMousePressed
 
     public void atualizarTabelaPlanta() {
         DefaultTableModel modelo = new DefaultTableModel();        

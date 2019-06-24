@@ -19,7 +19,7 @@ public class Lavoura extends javax.swing.JDialog {
 
     
     static void alterarLavoura(String label, double spinner) {
-        dao.LavouraDao.alterar(Lavoura.codigo, label, spinner);         
+        dao.LavouraDao.alterar(Lavoura.codigo_lavoura, label, spinner);         
     }
     
     static boolean getNovo(){
@@ -27,9 +27,8 @@ public class Lavoura extends javax.swing.JDialog {
     }
     
     static void adicionarProdutividade(ArrayList<Object[]> lista){
-        System.out.println("entrou nessa funcao");
         Short safra1 = Short.parseShort(Integer.toString(safra));                
-        int cod_lav = Lavoura.codigo;
+        int cod_lav = Lavoura.codigo_lavoura;
         
         //dao.ProdutividadeDao.inserir(qtd_sacas, safra1, Lavoura.codigo, cod_planta);      
         for(Object[] obj : lista){                        
@@ -49,8 +48,7 @@ public class Lavoura extends javax.swing.JDialog {
     }
     
     static void alterarProdutividade(int qtd, Short ano, int codigo_planta, String data){
-        System.out.println("entrou no alterar");
-        int cod_lav = Lavoura.codigo;
+        int cod_lav = Lavoura.codigo_lavoura;
         int cod_produtividade = Lavoura.cod_produtividade;            
         try {
             dao.LavouraPlantaDao.inserir(data, cod_lav, codigo_planta);
@@ -62,15 +60,57 @@ public class Lavoura extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
+    
+    static void adicionarAplicacao(ArrayList<Object[]> lista) throws java.text.ParseException {              
+        //int cod_lav = Lavoura.codigo_lavoura;
+        
+        //dao.ProdutividadeDao.inserir(qtd_sacas, safra1, Lavoura.codigo, cod_planta);      
+        for(Object[] obj : lista){
+            try {
+                String dataAplicacao = obj[0].toString();
+                int codigo_lavoura = Lavoura.codigo_lavoura;              
+                Double doseAplicacaoDefensivo = (Double) obj[3];
+                dao.AplicacaoDao.inserir(dataAplicacao, codigo_lavoura);
+                int cod_aplicacao = dao.AplicacaoDao.getCodigo(dataAplicacao, codigo_lavoura);
+                int cod_defensivo = dao.DefensivoDao.getCodigo(obj[2].toString(), obj[1].toString());                
+                dao.AplicacaoDefensivoDao.inserir(doseAplicacaoDefensivo, cod_aplicacao, cod_defensivo);
+                Lavoura.listagemDetalhada.atualizarTabelaAplicacao();
+            }
+            catch (Exception ex){
+                System.out.println("Erro aqui fiao: " + ex.getMessage());
+            }
+        }
+    }
+    
+    static void alterarAplicacao(double dose, String data_aplicacao, String nome, String classe) throws java.text.ParseException {
+        int codigo_aplicacao = Lavoura.codigo_aplicacao;
+        int codigo_defensivo = Lavoura.codigo_defensivo;        
+        try {
+            dao.AplicacaoDao.alterar(codigo_aplicacao, data_aplicacao);
+            dao.DefensivoDao.alterar(codigo_defensivo, nome, classe);
+            dao.AplicacaoDefensivoDao.alterar(dose, codigo_aplicacao, codigo_defensivo);
+            Lavoura.listagemDetalhada.atualizarTabelaAplicacao();
+        }
+        catch (Exception ex){
+            System.out.println("Erro aqui fiao: " + ex.getMessage());
+        }
+        
+    }
 
-    private static int codigo;
+    private static int codigo_lavoura;
     private ListagemLavoura listagem;
     private static ListagemLavouraDetalhada listagemDetalhada;    
     private static int cod_produtividade;
     private static int qtd_sacas;
     private static short safra;
     private static int cod_planta;
+    private static int codigo_aplicacao;
+    private static String data_aplicacao;
+    private static int codigo_defensivo;
+    private static Double dose;
     private static boolean novo = true;
+    
+    
     /**
      * Creates new form Lavoura
      */
@@ -80,6 +120,19 @@ public class Lavoura extends javax.swing.JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         System.out.println(Lavoura.novo);
+        
+        
+        PanelLavoura pl = (PanelLavoura) this.jTabbedPane1.getComponent(0);
+        PanelProdutividade pp = (PanelProdutividade) this.jTabbedPane1.getComponent(1);
+        PanelAplicacao pa = (PanelAplicacao) this.jTabbedPane1.getComponent(2);
+        try {
+            pl.setDisabled1();
+            pp.setDisabled1();
+            pa.setDisabled1();
+        }
+        catch (Exception ex){
+            
+        }
     }
     
     public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavoura listagem, int codigo, String nome, double area) throws Exception {
@@ -89,13 +142,13 @@ public class Lavoura extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         
         this.listagem = listagem;
-        this.codigo = codigo;
+        this.codigo_lavoura = codigo;
         this.jTabbedPane1.setSelectedIndex(0);
         this.jTabbedPane1.setEnabledAt(1, false);
         this.jTabbedPane1.setEnabledAt(2, false);
         PanelLavoura pl = (PanelLavoura) this.jTabbedPane1.getComponentAt(0);
         try {
-            pl.setDisabled();
+            pl.setDisabled2();
             pl.setLabel(nome);
             pl.setSpinner(area);
         }
@@ -111,7 +164,7 @@ public class Lavoura extends javax.swing.JDialog {
         setResizable(false);
         setLocationRelativeTo(null);        
         
-        this.codigo = codigo_lavoura;
+        this.codigo_lavoura = codigo_lavoura;
         this.listagemDetalhada = listagem;
         this.novo = false;
         
@@ -120,14 +173,38 @@ public class Lavoura extends javax.swing.JDialog {
         this.jTabbedPane1.setSelectedIndex(1);
         this.jTabbedPane1.setEnabledAt(0, false);
         this.jTabbedPane1.setEnabledAt(2, false);
-//        PanelProdutividade pp = (PanelProdutividade) this.jTabbedPane1.getComponentAt(0);
-//        try {
-//            pl.setDisabled();            
-//        }
-//        catch (Exception ex){
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
-//        
+
+        PanelProdutividade pp = (PanelProdutividade) this.jTabbedPane1.getComponent(1);
+        try {
+            pp.setDisabled1();
+        }
+        catch (Exception ex){
+            
+        }
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura, char a) throws Exception {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);        
+        
+        this.codigo_lavoura = codigo_lavoura;
+        this.listagemDetalhada = listagem;
+        this.novo = false;
+        
+        System.out.println(Lavoura.novo);
+        
+        this.jTabbedPane1.setSelectedIndex(2);
+        this.jTabbedPane1.setEnabledAt(0, false);
+        this.jTabbedPane1.setEnabledAt(1, false);
+        PanelAplicacao pa = (PanelAplicacao) this.jTabbedPane1.getComponent(2);
+        try {            
+            pa.setDisabled1();
+        }
+        catch (Exception ex){
+            
+        }
     }
     
     public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura, int codigo_produtividade, int qtd_sacas, short safra, int cod_planta) throws Exception {
@@ -139,7 +216,7 @@ public class Lavoura extends javax.swing.JDialog {
         this.novo = false;
         
         this.listagemDetalhada = listagem;
-        this.codigo = codigo_lavoura;
+        this.codigo_lavoura = codigo_lavoura;
         this.cod_produtividade = codigo_produtividade;
         this.qtd_sacas = qtd_sacas;
         this.safra = safra;
@@ -155,6 +232,59 @@ public class Lavoura extends javax.swing.JDialog {
             pp.setCultivar(cultivar);            
             pp.setQtd(this.qtd_sacas);
             pp.setSafra(this.safra);
+            pp.setDisabled2();
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura ,int codigo_aplicacao, int codigo_defensivo) throws Exception {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);        
+                
+        this.novo = false;
+        
+        this.listagemDetalhada = listagem;
+        this.codigo_lavoura = codigo_lavoura;
+        this.codigo_aplicacao = codigo_aplicacao;        
+        this.codigo_defensivo = codigo_defensivo;   
+        
+        this.jTabbedPane1.setSelectedIndex(2);
+        this.jTabbedPane1.setEnabledAt(0, false);
+        this.jTabbedPane1.setEnabledAt(1, false);
+    }
+    
+    public Lavoura(java.awt.Frame parent, boolean modal, ListagemLavouraDetalhada listagem, int codigo_lavoura ,int codigo_aplicacao, String data_aplicacao, int codigo_defensivo, Double dose) throws Exception {
+        super(parent, modal);
+        initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);        
+                
+        this.novo = false;
+        
+        this.listagemDetalhada = listagem;
+        this.codigo_lavoura = codigo_lavoura;
+        this.codigo_aplicacao = codigo_aplicacao;
+        this.data_aplicacao = data_aplicacao;
+        this.codigo_defensivo = codigo_defensivo;
+        this.dose = dose;        
+       
+        String nome = dao.DefensivoDao.select(this.codigo_defensivo)[0];
+        String classe = dao.DefensivoDao.select(this.codigo_defensivo)[1];
+        
+        this.jTabbedPane1.setSelectedIndex(2);
+        this.jTabbedPane1.setEnabledAt(0, false);
+        this.jTabbedPane1.setEnabledAt(1, false);
+        PanelAplicacao pa = (PanelAplicacao) this.jTabbedPane1.getComponentAt(2);
+        try {                        
+            pa.setDose(this.dose);
+            pa.setNome(nome);
+            pa.setClasse(classe);
+            pa.setData(this.data_aplicacao);
+            pa.setDisabled2();
         }
         catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
