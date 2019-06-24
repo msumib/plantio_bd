@@ -8,7 +8,10 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,6 +146,27 @@ public class DefensivoDao {
             return null;
         }
     }
+    
+    public static int getCodigo(String nome, String classe) {
+        String sql = "SELECT codigo FROM defensivo WHERE nome = ? AND classe = ?";
+        try {            
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);            
+            System.out.println("chegou até aqui na data do aplicacaoDao");            
+            ps.setString(1, nome);
+            ps.setString(2, classe);                         
+            ResultSet rs = ps.executeQuery();
+            int codigo = 0;
+            while(rs.next()){
+                codigo = rs.getInt("codigo");
+            }
+            return codigo;
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("nao deu piazada deu erro aqui");
+            System.out.println("Erro em lavouraplantadao: " + ex.getMessage());
+            return 0;
+        }
+    } 
     
     public static boolean alterar(int codigo, String nome, String classe) {
         if(autentica(nome, classe)){

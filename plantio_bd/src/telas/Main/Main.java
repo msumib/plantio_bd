@@ -6,6 +6,7 @@
 package telas.Main;
 
 import java.io.File;
+import java.text.ParseException;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -26,7 +27,7 @@ public class Main {
     
     private static Clip clip;
     
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, InterruptedException {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, InterruptedException, ParseException {
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -47,7 +48,9 @@ public class Main {
         sp.setVisible(true);
         Home h = new Home();
         //System.out.println(dao.LavouraDao.getCodigo("Lavourinha", 1.5));
-        System.out.println(dao.PlantaDao.getCodigo("Fumo", "Fumo mais ou menos Bom"));
+        //System.out.println(dao.PlantaDao.getCodigo("Fumo", "Fumo mais ou menos Bom"));
+        //System.out.println(dao.AplicacaoDao.getCodigo("1972-05-14", 17));
+        //System.out.println(dao.DefensivoDao.getCodigo("Joaossaa", "Inseticida"));
         try {
             for(int i = 0; i <= 100; i++){
                 Thread.sleep(30);

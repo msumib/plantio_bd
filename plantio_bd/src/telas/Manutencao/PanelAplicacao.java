@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class PanelAplicacao extends javax.swing.JPanel {
 
     private javax.swing.JTabbedPane mainTabbedPane;
-    private ArrayList<Object> lista = new ArrayList<>();
+    private ArrayList<Object[]> lista = new ArrayList<>();
 
     /**
      * Creates new form PanelAplicacao
@@ -340,6 +340,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
             String nome = getNome();
             //String lavoura = getLavoura();
             Double dose = getDose();
+            System.out.println("aqui no get dose do add primo: " + dose);
             Object[] array = {data, classe, nome, dose};
             this.lista.add(array);            
             
@@ -367,17 +368,33 @@ public class PanelAplicacao extends javax.swing.JPanel {
                         short safra = (short) obj[1];                        
                         int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
                         try {
-                            dao.LavouraPlantaDao.inserir(pd.getDataProd().toString(), cod_lav, cod_planta);
+                            dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
                             dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
                             this.getTopLevelAncestor().setVisible(false);
                         }
                         catch (Exception ex){
                             JOptionPane.showMessageDialog(null, ex.getMessage());
-                        }                        
+                        }                      
                     }
                 }
                 catch (NullPointerException ex){
                     System.out.println("Deu erro nullpointer: " + ex.getMessage());
+                }
+                try {
+                    for(Object[] obj : this.lista){
+                        String dataAplicacao = obj[0].toString();
+                        int codigo_lavoura = dao.LavouraDao.getCodigo(pl.getLabel(), pl.getSpinner());
+                        System.out.println("chegou aqui na parte de inserir aplicacao");
+                        dao.AplicacaoDao.inserir(dataAplicacao, codigo_lavoura);
+                        Double doseAplicacaoDefensivo = (Double) obj[3];
+                        int cod_aplicacao = dao.AplicacaoDao.getCodigo(dataAplicacao, codigo_lavoura);
+                        int cod_defensivo = dao.DefensivoDao.getCodigo(obj[2].toString(), obj[1].toString());
+                        dao.AplicacaoDefensivoDao.inserir(doseAplicacaoDefensivo, cod_aplicacao, cod_defensivo);
+                    }
+                    
+                }
+                catch (Exception ex){
+                    System.out.println("erro por aqui meu irmao: " + ex.getMessage());
                 }
             }
         
@@ -412,11 +429,11 @@ public class PanelAplicacao extends javax.swing.JPanel {
                             int cod_planta = dao.PlantaDao.getCodigo(obj[2].toString(), obj[3].toString());  
                             try {
                                 System.out.println("aqui foi");
-                                System.out.println(pd.getDataProd().toString());
+                                System.out.println(obj[4].toString());
                                 
+                                dao.LavouraPlantaDao.inserir(obj[4].toString(), cod_lav, cod_planta);
                                 dao.ProdutividadeDao.inserir(qtd, safra, cod_lav, cod_planta);                                                         
-                                System.out.println("produtividade foi");
-                                dao.LavouraPlantaDao.inserir(pd.getDataProd().toString(), cod_lav, cod_planta);
+                                System.out.println("produtividade foi");                                
                                 this.getTopLevelAncestor().setVisible(false);
                             }
                             catch (Exception ex2){
@@ -449,6 +466,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
             String nome = getNome();
             //String lavoura = getLavoura();
             Double dose = getDose();
+            System.out.println("aqui no get dose primo: " + dose);
             Object[] array = {data, classe, nome, dose};
             this.lista.add(array);
             
@@ -488,7 +506,7 @@ public class PanelAplicacao extends javax.swing.JPanel {
 
     public String getNome() throws Exception {
         if (comboboxNome.getSelectedIndex() > 0) {
-            return comboboxClasse.getSelectedItem().toString();
+            return comboboxNome.getSelectedItem().toString();
         } else {
             throw new Exception("Defensivo inválido.");
         }
