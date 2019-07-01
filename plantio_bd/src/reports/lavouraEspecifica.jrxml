@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bad781a2-0db5-4bd0-b19e-90e1b9771c53">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select nome, extensao_ha from lavoura]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="extensao_ha" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="451" y="0" width="96" height="79" uuid="ad022b59-7876-4751-b096-91f414e46574"/>
+				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\images\\agro_relatorio.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="17" y="25" width="118" height="37" uuid="ad92cbfa-08ce-49ab-8c55-b4559f9866a2"/>
+				<textElement>
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Relatório]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="23" width="100" height="20" uuid="c798e9ab-dc4c-4d99-b284-2615fb6383fd"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="23" width="100" height="20" uuid="a3247f7f-7dd3-4eff-8126-6312af0b5509"/>
+				<text><![CDATA[extensao_ha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="35" y="32" width="100" height="20" uuid="fdf0442b-93a9-481a-8af0-481afcbaee0a"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="32" width="100" height="20" uuid="299f4d5a-744d-4461-9ed0-41cb156e7169"/>
+				<textFieldExpression><![CDATA[$F{extensao_ha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

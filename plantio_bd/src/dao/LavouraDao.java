@@ -135,7 +135,6 @@ public class LavouraDao
             return codigo;
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("teu rs tá errado fi");
             return 0;            
         }
     }
