@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="238d6895-273e-4668-bce3-d5b9365f2d3d">
 	<property name="ireport.zoom" value="1.6105100000000043"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="379"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT * FROM lavoura]]>
@@ -23,7 +23,7 @@
 			</staticText>
 			<image>
 				<reportElement x="442" y="0" width="96" height="79" uuid="2884ec12-98a7-448f-b98d-8ea96a757e28"/>
-				<imageExpression><![CDATA["C:\\Users\\itzfeltrin\\Desktop\\plantio_bd\\plantio_bd\\src\\images\\agro_relatorio.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/umib/NetBeansProjects/plantio_bd_3/plantio_bd/src/images/agro_relatorio.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

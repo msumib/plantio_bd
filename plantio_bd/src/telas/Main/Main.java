@@ -88,8 +88,8 @@ public class Main {
             clip.open(stream);
             Main.clip = clip;
             Main.clip.start();
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-40.0f);
+            //FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            //gainControl.setValue(-40.0f);
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());

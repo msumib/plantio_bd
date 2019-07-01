@@ -87,7 +87,7 @@ public class GerarRelatorio {
         try {
             Connection conn = conexao.Conexao.getConexao();
             
-            String sql = "SELECT \"nome\", \"extensao_ha\" FROM \"lavoura\" WHERE \"nome\" = " + nome + ";";//Código SQL que ira retornar a consulta e que vc vai passar para o relatório
+            String sql = "select l.nome, l.extensao_ha, lp.data_do_plantio, p.tipo, p.cultivar from lavoura l join lavoura_planta lp on lp.codigo_lavoura = l.codigo join planta p on p.codigo = lp.codigo_planta WHERE nome = \'" + nome + "\';";//Código SQL que ira retornar a consulta e que vc vai passar para o relatório
             System.out.println(sql);
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -95,6 +95,7 @@ public class GerarRelatorio {
             JRResultSetDataSource jrRS = new JRResultSetDataSource(rs);
             /* HashMap de parametros utilizados no relatório. Sempre instanciados */
             Map parameters = new HashMap();
+            Object codigo_lavoura = null;
             //Passa as datas como parâmetro para aparecer no relatório
             parameters.put("codigo", codigo_lavoura);//Aqui vc passa os parâmetros para um hashmap, que será enviado para o relatório;
             /* Preenche o relatório com os dados. */
