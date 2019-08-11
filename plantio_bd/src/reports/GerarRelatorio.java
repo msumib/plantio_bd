@@ -82,12 +82,15 @@ public class GerarRelatorio {
         }
     }
     
-    public static void gerarLavouraEspecifica(String nome, String data){
+    public static void gerarLavouraEspecifica(String nome){
         PreparedStatement ps;
         try {
             Connection conn = conexao.Conexao.getConexao();
             
-            String sql = "select l.nome, l.extensao_ha, lp.data_do_plantio, p.tipo, p.cultivar from lavoura l join lavoura_planta lp on lp.codigo_lavoura = l.codigo join planta p on p.codigo = lp.codigo_planta WHERE nome = \'" + nome + "\';";//Código SQL que ira retornar a consulta e que vc vai passar para o relatório
+            String sql = "select l.nome, l.extensao_ha, lp.data_do_plantio, p.tipo, p.cultivar\n" +
+                        "from lavoura l\n" +
+                        "join lavoura_planta lp on lp.codigo_lavoura = l.codigo\n" +
+                        "join planta p on p.codigo = lp.codigo_planta WHERE nome = \'" + nome + "\';";//Código SQL que ira retornar a consulta e que vc vai passar para o relatório
             System.out.println(sql);
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
